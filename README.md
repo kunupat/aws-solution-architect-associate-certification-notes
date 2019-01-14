@@ -27,3 +27,10 @@ Amazon S3 Standard has three pricing components:
 * data transfer in or out (per GB per month)
 * requests (per thousand requests per month).
 ## EC2
+
+## AWS services that are specific to a region
+The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
+
+1. Security Groups
+2. IAM Keys
+3. 
