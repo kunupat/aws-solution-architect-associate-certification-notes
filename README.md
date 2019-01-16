@@ -55,9 +55,9 @@ Max file size that can be uploaded to S3 from AWS console is **78 GB**
   
   - **Virtual-hosted-style URL:** These are more user friendly as they starts with bucket name E.g. `http://mybucket.s3.amazonaws.com/image01.jpg`
   
-  **Using custom domain names to access S3 bucket: **
-      **HTTP-based URL:** Match bucket name to DNS registry name. E.g. `http://www.example.com/device.html` 
-      **HTTPS-based URL:** DON'T use *periods* in bucket name as it will NOT work with SSL due to SSL certificate exceptions. To avoid this issue- Write your own SSL certificate verification rule **OR** use HTTP-based virtual-hosted-URLs **OR** use path-style URLs **OR** use  `Amazon CloudFront` in conjunction with S3.
+  **Using custom domain names to access S3 bucket:**
+  - **HTTP-based URL:** Match bucket name to DNS registry name. E.g. `http://www.example.com/device.html` 
+  - **HTTPS-based URL:** DON'T use *periods* in bucket name as it will NOT work with SSL due to SSL certificate exceptions. To avoid this issue- Write your own SSL certificate verification rule **OR** use HTTP-based virtual-hosted-URLs **OR** use path-style URLs **OR** use  `Amazon CloudFront` in conjunction with S3.
 
 > S3 uses DNS for routing requests.
 
