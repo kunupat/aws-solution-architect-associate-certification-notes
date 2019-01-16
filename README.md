@@ -38,32 +38,52 @@ Max file size that can be uploaded to S3 from AWS console is **78 GB**
 2. **AWS CLI** commands/scripts
 3. **AWS SDKs and REST API calls**
 4. **AWS Services:**
-  4.1. AWS Direct Connect
-  4.2. AWS Storage Gateway
-  4.3. Amazon Kenesis Data Firehose
-  4.4. Amazon Kenesis Video Streams
-  4.5. Amazon Kenesis Data Streams
-  4.6. Amazon S3 Transfer Acceleration
-  4.7. AWS Snowball
-  4.8. AWS Snowball Edge
-  4.9. AWS Snowmobile
-  4.10. Third Party Connectors
+  - AWS Direct Connect
+  - AWS Storage Gateway
+  - Amazon Kenesis Data Firehose
+  - Amazon Kenesis Video Streams
+  - Amazon Kenesis Data Streams
+  - Amazon S3 Transfer Acceleration
+  - AWS Snowball
+  - AWS Snowball Edge
+  - AWS Snowmobile
+  - Third Party Connectors
 
-### Data Access
-1. REST APIs to access buckets and objects
-  1.1 **Path-style URL:** E.g `http://s3-eu-west-1.amazonaws.com/mybucket/image01.jpg`
+### Data Access: REST APIs to access buckets and objects
+  - **Path-style URL:** E.g `http://s3-eu-west-1.amazonaws.com/mybucket/image01.jpg`
   > **NOTE:** For US East (N. Viriginia) region, the URL will be different. E.g. `http://s3.amazonaws.com/mybucket/image01.jpg`
-  1.2 **Virtual-hosted-style URL:** These are more user friendly as they starts with bucket name E.g. `http://mybucket.s3.amazonaws.com/image01.jpg`
-  * Using custom domain names to access S3 bucket: 
+  
+  - **Virtual-hosted-style URL:** These are more user friendly as they starts with bucket name E.g. `http://mybucket.s3.amazonaws.com/image01.jpg`
+  
+  **Using custom domain names to access S3 bucket: **
       **HTTP-based URL:** Match bucket name to DNS registry name. E.g. `http://www.example.com/device.html` 
       **HTTPS-based URL:** DON'T use *periods* in bucket name as it will NOT work with SSL due to SSL certificate exceptions. To avoid this issue- Write your own SSL certificate verification rule **OR** use HTTP-based virtual-hosted-URLs **OR** use path-style URLs **OR** use  `Amazon CloudFront` in conjunction with S3.
 
 > S3 uses DNS for routing requests.
 
+
 ### Handling Routing errors:
 > If a request to S3 is incorrectly routed to incorrect AWS region, S3 sends temporary redirect. **Ensure to implement retry logic in you requester application for redirect response codes**.
 
 > If a request to S3 is mal-formed, S3 sends **permanent redirect** and responds with 4XX bad request error code. Fix the request to resolve this issue.
+
+### Operations on Objects
+1. PUT
+* Single Part- Use for objects of size <= 5GB. **Recommended for objects less than 100 MBs.**
+* Multi part- Use for objects of size > 5GB and <= 5TB. **Recommended for objects greater than 100 MBs.** Ensure aborting or completing incomplete mult-part PUTs. There is an option in Lifecycle Management section in AWS console to automatically do this.
+
+2. COPY
+Copy objects within S3, rename objects by creating copy and deleting the original, update metadata of object or move objects across S3 locations.
+
+3. GET
+Retrieve full object or in multi-part by specifying range of bytes
+
+4. DELETE
+Delete single or multiple objects with one DELETE. If versioning is disabled, DELETE will permanently deteles the object. If versioning is enabled, S3 can delete object version permanently or insert delete marker. If DETELE request only contains the key name, S3 will insert delete marker and this becomes current version of the object. If you try to GET a object that has delete marker, S3 will respond with 404 NOT FOUND error.
+
+To recover the object, remove delete marker from current version of the object. Delete a specific version of the object by specifying object key and version ID.
+
+To delete the object completly, you MUST detele each individual version.
 
 ## EC2
 
