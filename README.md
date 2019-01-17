@@ -119,7 +119,14 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
 
 ### S3 Bucket Access
 #### Bucket Policies
-- Bucket Policies are similar to IAM policy but are applied to AWS resources (S3 in this case). Hence it will also have *principal* defined in the policy as opposed to IAM policies. Sample bucket policy:
+
+> Control who can access this bucket.
+
+- Bucket Policies are similar to IAM policy but are applied to AWS resources (S3 in this case). Hence it will also have *principal* defined in the policy as opposed to IAM policies. 
+- Bucket policies can also have *conditions*. Condition values can be date, time, ARN of requester, IP of requester, user name, user id and user agent. S3 policy also support conditions using `object tags`.
+- Sample bucket policy:
+
+- Can be used to put size limit policies (upto 20KBs) on S3 buckets/objects.
 
 ```
 {
@@ -137,7 +144,14 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
 }
 ```
 - Bucket policies can be applied to S3 buckets and objects. They CANNOT be used to control access to S3's Management Functions.
-
+- Bucket policy simulator: https://policysim.aws.amazon.com
+- Policy Elements:
+    * NotPrincipal:
+        * Denies all except the principal defined in NotPrincipal
+        * AWS recommends to not to use it in policy with `Effect=Allow`
+        * The order in which AWS evaluates principals makes a difference with "Effect=Deny"
+        * Always also provide the AWS account number along with the user ARN which you want to exempt from `deny` policy. If only user ARN is provided in NotPrincipal, then AWS will restrict access to all the users in all those AWS accounts which coontain a user with the given user ARN.
+        
 ## EC2
 
 ## AWS services that are specific to a region
