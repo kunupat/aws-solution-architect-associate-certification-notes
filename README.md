@@ -1,4 +1,10 @@
 # AWS Solution Architect February 2018 Associate Level Certification Exam Notes
+
+## Contents
+* [Identity & Access Management (IAM)]()
+* [Simple Storage Service (S3)]()
+* [Elastic Compute Cloud (EC2)]()
+
 ## Identity & Access Management (IAM)
 ### IAM Policies
 
@@ -150,7 +156,7 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
         * The order in which AWS evaluates principals makes a difference with "Effect=Deny"
         * Always also provide the AWS account number along with the user ARN which you want to exempt from `deny` policy. If only user ARN is provided in NotPrincipal, then AWS will restrict access to all the users in all those AWS accounts which coontain a user with the given user ARN.
         
-## EC2
+## Elastic Compute Cloud (EC2)
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
 
