@@ -1,4 +1,4 @@
-# AWS Solution Architect February 2018 Associate Level Certification Exam Notes
+# AWS Solutions Architect February 2018 Associate Level Certification Exam Notes
 
 ## Contents
 * [Identity & Access Management (IAM)](#identity-&-access-management)
