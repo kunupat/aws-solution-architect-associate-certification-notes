@@ -1,9 +1,9 @@
 # AWS Solution Architect February 2018 Associate Level Certification Exam Notes
 
 ## Contents
-* [Identity & Access Management (IAM)](#Simple Storage Service (S3))
-* [Simple Storage Service (S3)](#Simple Storage Service (S3))
-* [Elastic Compute Cloud (EC2)](#Elastic Compute Cloud (EC2))
+* [Identity & Access Management (IAM)](#simple-storage-service-(s3))
+* [Simple Storage Service (S3)](#simple-storage-service-(s3))
+* [Elastic Compute Cloud (EC2)](#elastic-compute-cloud-(ec2))
 
 ## Identity & Access Management (IAM)
 ### IAM Policies
