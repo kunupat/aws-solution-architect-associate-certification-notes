@@ -1,7 +1,5 @@
 # AWS Solution Architect February 2018 Associate Level Certification Exam Notes
-
 ## Identity & Access Management (IAM)
-
 ### IAM Policies
 
 > Control what this user can do in AWS.
@@ -26,7 +24,7 @@ Sample IAM policy for allowing PUT object action on Amazon S3 bucket:
 ```
 > **Note:** IAM policy has three main parts: Action, Effect and Resource. An IAM policy DOESN'T have principal.
 
-## S3
+## Simple Storage Service (S3)
 ### S3 Usage Patterns (When to use S3)
 1. Store and distribute static web content and media
 2. Host entire static web sites
@@ -153,10 +151,8 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
         * Always also provide the AWS account number along with the user ARN which you want to exempt from `deny` policy. If only user ARN is provided in NotPrincipal, then AWS will restrict access to all the users in all those AWS accounts which coontain a user with the given user ARN.
         
 ## EC2
-
-## AWS services that are specific to a region
+### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
 
 1. Security Groups
 2. IAM Keys
-3. 
