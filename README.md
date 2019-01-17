@@ -1,11 +1,11 @@
 # AWS Solution Architect February 2018 Associate Level Certification Exam Notes
 
 ## Contents
-* [Identity & Access Management (IAM)](#simple-storage-service-(s3))
-* [Simple Storage Service (S3)](#simple-storage-service-(s3))
-* [Elastic Compute Cloud (EC2)](#elastic-compute-cloud-(ec2))
+* [Identity & Access Management (IAM)](#identity-&-access-management)
+* [Simple Storage Service (S3)](#simple-storage-service)
+* [Elastic Compute Cloud (EC2)](#elastic-compute-cloud)
 
-## Identity & Access Management (IAM)
+## Identity & Access Management
 ### IAM Policies
 
 > Control what this user can do in AWS.
@@ -30,7 +30,7 @@ Sample IAM policy for allowing PUT object action on Amazon S3 bucket:
 ```
 > **Note:** IAM policy has three main parts: Action, Effect and Resource. An IAM policy DOESN'T have principal.
 
-## Simple Storage Service (S3)
+## Simple Storage Service
 ### S3 Usage Patterns (When to use S3)
 1. Store and distribute static web content and media
 2. Host entire static web sites
@@ -156,7 +156,7 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
         * The order in which AWS evaluates principals makes a difference with "Effect=Deny"
         * Always also provide the AWS account number along with the user ARN which you want to exempt from `deny` policy. If only user ARN is provided in NotPrincipal, then AWS will restrict access to all the users in all those AWS accounts which coontain a user with the given user ARN.
         
-## Elastic Compute Cloud (EC2)
+## Elastic Compute Cloud
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
 
