@@ -1,6 +1,30 @@
 # AWS Solution Architect February 2018 Associate Level Certification Exam Notes
 
-## IAM
+## Identity & Access Management (IAM)
+
+### IAM Policies
+
+> Control what this user can do in AWS.
+
+IAM policies can be assigned to IAM users, groups and roles.
+
+Sample IAM policy for allowing PUT object action on Amazon S3 bucket:
+
+```
+{
+  "Version":"2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::mybucket/*"
+    }
+  ]
+}
+```
+> **Note:** IAM policy has three main parts: Action, Effect and Resource. An IAM policy DOESN'T have principal.
 
 ## S3
 ### S3 Usage Patterns (When to use S3)
@@ -76,7 +100,7 @@ Max file size that can be uploaded to S3 from AWS console is **78 GB**
 Copy objects within S3, rename objects by creating copy and deleting the original, update metadata of object or move objects across S3 locations.
 
 3. GET
-Retrieve full object or in multi-part by specifying range of bytes
+Retrieve full object or in multi-part by using **Range GET*
 
 4. DELETE
 Delete single or multiple objects with one DELETE. If versioning is disabled, DELETE will permanently deteles the object. If versioning is enabled, S3 can delete object version permanently or insert delete marker. If DETELE request only contains the key name, S3 will insert delete marker and this becomes current version of the object. If you try to GET a object that has delete marker, S3 will respond with 404 NOT FOUND error.
@@ -84,6 +108,35 @@ Delete single or multiple objects with one DELETE. If versioning is disabled, DE
 To recover the object, remove delete marker from current version of the object. Delete a specific version of the object by specifying object key and version ID.
 
 To delete the object completly, you MUST detele each individual version.
+
+### Pre-signed URLs
+These are used to provide access(PUT/GET) to users/applications who do not have AWS credentials and still not exposing the S3 buckets publicly. These URLs can be programmatically generated using Java/.Net AWS SDK or AWS CLI.
+
+**A pre-signed URL has:** security credentials, bucket name, object key, HTTP method and expiration date-time.
+
+### Cross Origin Resource Sharing (CORS)
+CORS can be configured using a XML config file that can contain 100 CORS rules.Use AWS SDK to apply CORS configuration to S3 bucket. CORS configration is used to allow access to S3 objects from an application hosted in different domain.
+
+### S3 Bucket Access
+#### Bucket Policies
+- Bucket Policies are similar to IAM policy but are applied to AWS resources (S3 in this case). Hence it will also have *principal* defined in the policy as opposed to IAM policies. Sample bucket policy:
+
+```
+{
+  "Version":"2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Principal": "aws:arn:iam::123456789012:user/john",
+      "Resource": "arn:aws:s3:::mybucket/*"
+    }
+  ]
+}
+```
+- Bucket policies can be applied to S3 buckets and objects. They CANNOT be used to control access to S3's Management Functions.
 
 ## EC2
 
