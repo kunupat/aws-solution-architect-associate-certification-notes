@@ -96,18 +96,18 @@ Max file size that can be uploaded to S3 from AWS console is **78 GB**
 > If a request to S3 is mal-formed, S3 sends **permanent redirect** and responds with 4XX bad request error code. Fix the request to resolve this issue.
 
 ### Operations on Objects
-1. PUT
+1. `PUT`
 * Single Part- Use for objects of size <= 5GB. **Recommended for objects less than 100 MBs.**
 * Multi part- Use for objects of size > 5GB and <= 5TB. **Recommended for objects greater than 100 MBs.** Ensure aborting or completing incomplete mult-part PUTs. There is an option in Lifecycle Management section in AWS console to automatically do this.
 
-2. COPY
-Copy objects within S3, rename objects by creating copy and deleting the original, update metadata of object or move objects across S3 locations.
+2. `COPY`
+    Copy objects within S3, rename objects by creating copy and deleting the original, update metadata of object or move objects across S3 locations.
 
-3. GET
-Retrieve full object or in multi-part by using **Range GET*
+3. `GET`
+    Retrieve full object or in multi-part by using **Range GET*
 
-4. DELETE
-Delete single or multiple objects with one DELETE. If versioning is disabled, DELETE will permanently deteles the object. If versioning is enabled, S3 can delete object version permanently or insert delete marker. If DETELE request only contains the key name, S3 will insert delete marker and this becomes current version of the object. If you try to GET a object that has delete marker, S3 will respond with 404 NOT FOUND error.
+4. `DELETE`
+    Delete single or multiple objects with one DELETE. If versioning is disabled, DELETE will permanently deteles the object. If versioning is enabled, S3 can delete object version permanently or insert delete marker. If DETELE request only contains the key name, S3 will insert delete marker and this becomes current version of the object. If you try to GET a object that has delete marker, S3 will respond with 404 NOT FOUND error.
 
 To recover the object, remove delete marker from current version of the object. Delete a specific version of the object by specifying object key and version ID.
 
@@ -150,12 +150,23 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
 - Bucket policies can be applied to S3 buckets and objects. They CANNOT be used to control access to S3's Management Functions.
 - Bucket policy simulator: https://policysim.aws.amazon.com
 - Policy Elements:
-    * NotPrincipal:
+    * **NotPrincipal:**
         * Denies all except the principal defined in NotPrincipal
         * AWS recommends to not to use it in policy with `Effect=Allow`
-        * The order in which AWS evaluates principals makes a difference with "Effect=Deny"
+        * The order in which AWS evaluates principals makes a difference with `Effect=Deny`
         * Always also provide the AWS account number along with the user ARN which you want to exempt from `deny` policy. If only user ARN is provided in NotPrincipal, then AWS will restrict access to all the users in all those AWS accounts which coontain a user with the given user ARN.
         
+    * **NotAction:**
+        * `Allow` or `Deny` all actions except one listed with `NotAction`
+        * If used with `Deny`, it will not explicitly allow access to all the other actions not listed with `NotAction`
+        * If used with `Allow`, it will explicitly allow access to all actions except the one listed with `NotAction`
+    * **NotResouce:**
+        * `Allow` or `Deny` all resources except one listed with `NotResource`
+
+- Cross-Account Access:
+  * **Problem:** Let's say,Person `X` is owner of Bucket `XBucket` created in `Account A`. Person `Y`(from AWS `Account B`) has been allowed access to `PUT` objects in `XBucket` via a bucket policy. When `Y` PUTs an object in `XBucket`, `Y` becomes owner of the object. When `X` tries to `GET` this object, he will be denied access to it even if `X` is the owner of the `XBucket`.
+  * **Solution:** Add a `condition` in bucket policy to `allow` full access to bucket owner using `bucket-owner-full-control` when Account B uploads object to `XBucket`. With this, if `PUT` does not grant `bucket-owner-full-control`, the upload will fail.
+  
 ## Elastic Compute Cloud
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
