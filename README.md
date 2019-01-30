@@ -183,9 +183,8 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
 ##### Server Side Encryption
 - AWS provided keys (SSE-S3)
   - Every object is encrypted with a unique key using AES-256 encryption standard. Each unique key is encrypted with a regularly rotating master key
-  - Enable `Default Encryption` on bucket to enable encryption or use a bucket policy to enable encryption on all the objects stored in a bucket. The `x-amz-server-side-encryption` can be used in bucket policy to `deny` upload to the bucket if the request does not contain `x-amz-server-side-encryption: AES256`
-  
-  - 
+  - Enable `Default Encryption` on bucket to enable encryption or use a bucket policy to enable encryption on all the objects stored in a bucket. The `x-amz-server-side-encryption` can be used in bucket policy to `deny` upload to the bucket if the request does not contain `x-amz-server-side-encryption: AES256` request header. In case of using REST API POST method, `x-amz-server-side-encryption: AES256` should be passed as form field and not in request header.
+  - We can't enforce SSE-S3 with presigned URLs.
 - AWS KMS managed keys (SSE-KMS)
 - Customer provided keys (SSE-C)
 
