@@ -178,6 +178,20 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
 
 > **NOTE:** Use VPC endpoint for secured connection between EC2 instances and S3. Using VPC endpoint, the traffic from EC2 to S3 bucket will not be directed via internet, making it more secured. You can control access to S3 via VPC endpoint by applying VPC endpoint policies OR using bucket policies. VPC endpoint policy is a `resource policy` which means it needs `principal` to be specified.
 
+### Encryption
+#### Data At Rest
+##### Server Side Encryption
+- AWS provided keys (SSE-S3)
+  - Every object is encrypted with a unique key using AES-256 encryption standard. Each unique key is encrypted with a regularly rotating master key
+  - Enable `Default Encryption` on bucket to enable encryption or use a bucket policy to enable encryption on all the objects stored in a bucket. The `x-amz-server-side-encryption` can be used in bucket policy to `deny` upload to the bucket if the request does not contain `x-amz-server-side-encryption: AES256`
+  
+  - 
+- AWS KMS managed keys (SSE-KMS)
+- Customer provided keys (SSE-C)
+
+##### Client Side Encryption
+Encrypt data before uploading to S3
+
 ## Elastic Compute Cloud
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
