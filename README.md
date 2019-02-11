@@ -4,6 +4,7 @@
 * [Identity & Access Management (IAM)](#identity-&-access-management)
 * [Simple Storage Service (S3)](#simple-storage-service)
 * [Elastic Compute Cloud (EC2)](#elastic-compute-cloud)
+* [Exam structure in January 2019](#exam-structure-in-january-2019)
 
 ## Identity & Access Management
 ### IAM Policies
@@ -197,3 +198,5 @@ The below AWS services are specific to a AWS region. E.g. If you plan to launch 
 
 1. Security Groups
 2. IAM Keys
+
+## exam-structure-in-january-2019
