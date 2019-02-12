@@ -196,16 +196,15 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
   
 - **Customer provided keys (SSE-C)**
   - Amazon S3 does not store your encryption key. You have to manage your encryption keys
-  
+
+##### Default Encryption
+It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted with the chosen default encryption.
+
+#### Data In Transit
 ##### Client Side Encryption
 - Encrypt data before uploading to S3. There are two options available:
   - Use AWS KMS-Managed customer master key
   - Use client-side master key
-  
-##### Default Encryption
-It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted with the chosen default encryption.
-
-
 
 ## Elastic Compute Cloud
 ### AWS services that are specific to a region
@@ -214,4 +213,4 @@ The below AWS services are specific to a AWS region. E.g. If you plan to launch 
 1. Security Groups
 2. IAM Keys
 
-## exam-structure-in-january-2019
+## Exam Structure In January 2019
