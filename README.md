@@ -182,15 +182,30 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
 ### Encryption
 #### Data At Rest
 ##### Server Side Encryption
-- AWS provided keys (SSE-S3)
+- **AWS provided keys (SSE-S3)**
   - Every object is encrypted with a unique key using AES-256 encryption standard. Each unique key is encrypted with a regularly rotating master key
   - Enable `Default Encryption` on bucket to enable encryption or use a bucket policy to enable encryption on all the objects stored in a bucket. The `x-amz-server-side-encryption` can be used in bucket policy to `deny` upload to the bucket if the request does not contain `x-amz-server-side-encryption: AES256` request header. In case of using REST API POST method, `x-amz-server-side-encryption: AES256` should be passed as form field and not in request header.
-  - We can't enforce SSE-S3 with presigned URLs.
-- AWS KMS managed keys (SSE-KMS)
-- Customer provided keys (SSE-C)
-
+  - We can't enforce SSE-S3 with presigned URLs
+  
+- **AWS KMS managed keys (SSE-KMS)**
+  - Uses a per object key which in turn is encrypted using a rotating customer master key (CMK). Master keys stored in AWS KMS, known as customer master keys (CMKs).
+  - This scheme is called [Envelope Encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#enveloping)
+  - When you use a SSE-KMS for the first time, it will create a CMK automatically. You can create your own CMK as well. Creating a CMK yourself can provide some flexibility to: create, rotate, disable, define access control and audit.
+  - Access to KMS keys can be controlled by AWS IAM
+  - **NOTE:** There is a restriction on number of requests per second based on the operations. Check the [limits here](http://docs.aws.amazon.com/kms/latest/developerguide/limits.html)
+  
+- **Customer provided keys (SSE-C)**
+  - Amazon S3 does not store your encryption key. You have to manage your encryption keys
+  
 ##### Client Side Encryption
-Encrypt data before uploading to S3
+- Encrypt data before uploading to S3. There are two options available:
+  - Use AWS KMS-Managed customer master key
+  - Use client-side master key
+  
+##### Default Encryption
+It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted with the chosen default encryption.
+
+
 
 ## Elastic Compute Cloud
 ### AWS services that are specific to a region
