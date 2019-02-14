@@ -233,8 +233,19 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 - S3 Glacier
   - This is one way transition
 - S3 Inventory: S3 object metadata can be expoerted as CSV or ORC file. Inventory is cheaper than REST APIs for S3 to generate report of S3 objects.
+- Two actions that can be used in a lifecycle policy:
+  - Expiration
+  - Transition
 - Tags
-- Cross Region Replication(CRR): Required for-
+- Events
+- Versioning
+- Requester Pays
+- Server Access Logging
+- Default Encryption
+- Object Level Logging
+- Static Websites
+- Transfer Acceleration
+- Cross Region Replication(CRR): Can be needed for-
   - Compliance
   - Reduce Latency
   - Operational
@@ -243,7 +254,14 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
     - Versioning enabled on source and destination buckets
     - Buckets must be in different regions
     - IAM role is configured for CRR
-
+  - CRR does not replicate:
+    - bucket lifecycle configuration policies
+    - objects in source bucket before the replication config was added
+    - objects in source bucket for which the bucket owner does not have permissions for
+    - objects in source bucket that are already replicated 
+    - SEC-C encrypted objects
+  - Ownership Overwrite: Owner of the destination bucket becomes the owner of object after it is replicated
+  
 ## Elastic Compute Cloud
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
