@@ -206,6 +206,44 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
   - Use AWS KMS-Managed customer master key
   - Use client-side master key
 
+### Security
+- [AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html)
+  - Monitors and records S3 configurations. Notifies when config is not compliant to internal guidelines
+  - Auditing and SNS notifications
+  - Built-in rules:
+    - s3-bucket-logging-enabled
+    - s3-bucket-public-read-prohibited
+    - s3-bucket-public-write-prohibited
+    - s3-bucket-ssl-requests-only
+    - s3-bucket-versioning-enabled
+  - Custom rules  
+- [API Logging with AWS Cloudtrail](https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudtrail-logging.html)
+- AWS Inventory to review bucket permissions
+- **AWS Trusted Advisor** to inspect AWS bucket permissions, bucket logging, bucket versioning. Free if business or enterprise support is enabled on your AWS account.
+- [Amazon Macie](https://aws.amazon.com/macie/): Machine learning based service to determine PII, PHI, PCI, etc. data in AWS.
+
+### Managing Storage
+- Lifecycle Configuration Rules can be used for Automatic Transition to S3 storage tier.
+- S3 Standard to others:
+  - objects < 128 KB cannot be transitioned
+  - objects must be stored for more than 30 days
+- S3 Stardard IA to S3 One-zone IA or Glacier:
+  - objects must be stored for more than 30 days
+- S3 One-zone IA to Glacier
+- S3 Glacier
+  - This is one way transition
+- S3 Inventory: S3 object metadata can be expoerted as CSV or ORC file. Inventory is cheaper than REST APIs for S3 to generate report of S3 objects.
+- Tags
+- Cross Region Replication(CRR): Required for-
+  - Compliance
+  - Reduce Latency
+  - Operational
+  - Data Protection
+  - CRR Requirements:
+    - Versioning enabled on source and destination buckets
+    - Buckets must be in different regions
+    - IAM role is configured for CRR
+
 ## Elastic Compute Cloud
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
