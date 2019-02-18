@@ -1,6 +1,6 @@
 # AWS Solutions Architect February 2018 Associate Level Certification Exam Notes
 
-Refer to my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-Architect-Associate-Certification.html) for a listing of material and useful links to pass AWS Solutions Architect February 2018 Associate Level Certification exam.
+Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-Architect-Associate-Certification.html) for a listing of material and useful links to pass AWS Solutions Architect February 2018 Associate Level Certification exam.
 
 ## Contents
 * [Identity & Access Management (IAM)](#identity-&-access-management)
