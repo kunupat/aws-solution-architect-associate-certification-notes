@@ -261,6 +261,40 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
     - objects in source bucket that are already replicated 
     - SEC-C encrypted objects
   - Ownership Overwrite: Owner of the destination bucket becomes the owner of object after it is replicated
+  - Use **Storage Class Analysis** to analyze storage access patterns to use the right storage classes
+  - Use **Amazon QuickSight** for storage class analysis
+  - Use **Cloudwatch Metrics** for S3:
+    - Storage Metrics (does not incur additional costs)
+      - BucketSizeBytes
+      - NumberOfObjects
+    - There are also a number of Request Metrics available. This incurs additional cost.
+      - HTTP Operations (GET, POST...)
+      - HTTP Error Codes (500, 404...)
+      - Total Latency
+      - Bytes Uploaded/Bytes Downloaded
+    - Cloudwatch Logs integrated with Cloudtrail
+
+### Performance Optimization
+  - **S3 Transfer Acceleration:** For uoloads over long distances. [Speed Comparator Online](https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html).
+    - Uses Global Edge Locations
+    - Uses Amazon Backbone for most of the data transfer
+    - Additional charges may apply
+  - **Multipart upload API:** FOr uploading large objects
+  - **Range GETs:** `GET` performance optimization with CloudFront
+  - **S3 Inventory:** For optimizing *list objects and their meta-data* operation instead of using list API
+  - Request Rate Performance(on a single partition):
+    - 3500 `PUT/POST/DELETE` combined requests per second
+    - 5500 `GET` requests per second
+    - Amazon *automatically* uses multiple partitions if the no. of requests exceed the above limits to avoid seeing `HTTP 500` error codes. You can also do pre-partitioning of data (work with AWS Support)
+  - Parallelization:
+     - Parallal uploads
+     - Multiplart uploads (consider this when oject size exceeds 100MB)
+     - Multipart downloads (`TransferManager` class of S3 Java SDK)
+  - Amazon S3 Select: Retrieve only a subset of data based on a SQL expression
+    - Lesser data --> Lesser Cost (Pay-as-you-go)
+    - Available as API (Like `GET` requests)
+    - Used with- AWS Tools and SDKS, AWS CLI and AWS S3 Console (S3 console data access limits to 40 MB)
+  - Amazon CloudFront
   
 ## Elastic Compute Cloud
 ### AWS services that are specific to a region
