@@ -229,7 +229,7 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
   - Delete the *Delete Marker* to restore the deleted versioned object
   - **Suspend Versioning:** 
     - `PUT`: If a new version of an object is uploaded, then if that object had any previous versions, a new version of the object will be uploaded with `Null` version ID with old versions intact. If, the object had no previous versions, a new version of the object will be uploaded with `Null` version ID.
-    - `DELETE`: If an object had multiple existing versions, `DELETE` operation will create a Detele Marker. When you delete the Detele Marker, it will delete the marker but all previous versions of the object will be retained. If an object had no existing versions, `DELETE` operation will create a Detele Marker. When you delete the Detele Marker, it will delete the marker and the object's version too. 
+    - `DELETE`: If an object had multiple existing versions, `DELETE` operation will create a Detele Marker. When you delete the Detele Marker, it will delete the marker but all previous versions of the object will be retained. If an object had no existing versions, `DELETE` operation will create a Detele Marker. When you delete the Delete Marker, it will delete the marker and the object's version too. 
     
 2. **Server Access Logging:**
 - Server access logs contain the following:
@@ -248,7 +248,8 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 
 4. **Static Website Hosting:** [More Details Here](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
 - No additional service is required to host static website (client-side scripting is supported but NOT server side scripting)
-- Format: `bucket-name.s3-website-AWS Region.amazonaws.com`
+- Format 1: `<bucket-name>.s3-website-<AWS-Region>.amazonaws.com`
+- Format 2: `<bucket-name>.s3-website.<AWS-Region>.amazonaws.com`
 
 5. **Default Encryption**
 
