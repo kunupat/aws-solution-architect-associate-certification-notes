@@ -224,6 +224,34 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 - **AWS Trusted Advisor** to inspect AWS bucket permissions, bucket logging, bucket versioning. Free if business or enterprise support is enabled on your AWS account.
 - [Amazon Macie](https://aws.amazon.com/macie/): Machine learning based service to determine PII, PHI, PCI, etc. data in AWS.
 
+### Bucket Options
+1. **Versioning:** Recycle-bean like feature
+  - Delete the *Delete Marker* to restore the deleted versioned object
+  - **Suspend Versioning:** 
+    - `PUT`: If a new version of an object is uploaded, then if that object had any previous versions, a new version of the object will be uploaded with `Null` version ID with old versions intact. If, the object had no previous versions, a new version of the object will be uploaded with `Null` version ID.
+    - `DELETE`: If an object had multiple existing versions, `DELETE` operation will create a Detele Marker. When you delete the Detele Marker, it will delete the marker but all previous versions of the object will be retained. If an object had no existing versions, `DELETE` operation will create a Detele Marker. When you delete the Detele Marker, it will delete the marker and the object's version too. 
+    
+2. **Server Access Logging:**
+- Server access logs contain the following:
+  - Requester
+  - Bucket Name
+  - Request Time
+  - Request Action
+  - Response Status
+  - Error Code
+- Logs are written to another S3 Bucket or the same bucket on which the Server Access Logging is enabled. Ensure that the destination bucket has right permissions to allow writing logs to it.
+
+3. **Object-level Logging:**
+- Using CloudTrail Logging
+- Know *Who, When and What* about the requests at the objects and buckets level
+> **Recommendation:** If you enable object access logging on all the S3 buckets in your account then choose the destination bucket to use for logging in another AWS account.
+
+4. **Static Website Hosting:** [More Details Here](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
+- No additional service is required to host static website (client-side scripting is supported but NOT server side scripting)
+- Format: `bucket-name.s3-website-AWS Region.amazonaws.com`
+
+5. **Default Encryption**
+
 ### Managing Storage
 - Lifecycle Configuration Rules can be used for Automatic Transition to S3 storage tier.
 - S3 Standard to others:
@@ -288,7 +316,7 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
     - 3500 `PUT/POST/DELETE` combined requests per second
     - 5500 `GET` requests per second
     - Amazon *automatically* uses multiple partitions if the no. of requests exceed the above limits to avoid seeing `HTTP 500` error codes. You can also do pre-partitioning of data (work with AWS Support)
-  - Parallelization:
+  - Parallalization:
      - Parallal uploads
      - Multiplart uploads (consider this when oject size exceeds 100MB)
      - Multipart downloads (`TransferManager` class of S3 Java SDK)
