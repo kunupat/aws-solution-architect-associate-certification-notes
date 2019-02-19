@@ -175,7 +175,6 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
 - Access Control Lists: 
   - You may not need IAM policies if ACL are sufficient to control access to buckets.
   - The bucket policy applies only to objects that are owned by the bucket owner. If your bucket contains objects that aren't owned by the bucket owner, public READ permission on those objects should be granted using the object access control list (ACL).
-  - 
   
 - Predefined Groups:
   - Authenticated Users Group: Represents all AWS accounts **worldwide** and not only authenticated users from your AWS account. **USE WITH CAUTION**
