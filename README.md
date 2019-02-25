@@ -5,7 +5,8 @@ Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-
 ## Contents
 * [Identity & Access Management (IAM)](#identity-&-access-management)
 * [Simple Storage Service (S3)](#simple-storage-service)
-* [Storage Gateway] (#storage-gateway)
+* [Storage Gateway](#storage-gateway)
+* [Snowball](#snowball)
 * [Elastic Compute Cloud (EC2)](#elastic-compute-cloud)
 * [Exam structure in January 2019](#exam-structure-in-january-2019)
 
@@ -358,7 +359,19 @@ Using SSL/TLS
         - Needs less storage capacity on-prem compared to Stored Volumes
   - **Tape Gateway (Virtual Tape Library- VTL)** - Backup/archival using virtual tapes
     - Cost-effective durable solution for archiving data in AWS
- 
+
+## Snowball
+- **Snowball**
+  - Petabyte scale data transport hardware appliance to move data in/out from AWS
+  - 80TB snowball in all regions and 50TB snowballs in US regions
+  - tamper resistant, AES-256 encrypted, full chain of custody
+- **Snowball Edge**
+  - Snowball like but with 100TB data transfer and on-board storage and compute capability
+  - Like small AWS data-center
+- **Snowmobile**
+  - A shipping container on a truck for 100 Peta Bytes scale data transport for hexabyte-scale data tranfer
+- Import and export to/from S3
+
 ## Elastic Compute Cloud
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
