@@ -5,6 +5,7 @@ Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-
 ## Contents
 * [Identity & Access Management (IAM)](#identity-&-access-management)
 * [Simple Storage Service (S3)](#simple-storage-service)
+* [Storage Gateway] (#storage-gateway)
 * [Elastic Compute Cloud (EC2)](#elastic-compute-cloud)
 * [Exam structure in January 2019](#exam-structure-in-january-2019)
 
@@ -337,7 +338,27 @@ Using SSL/TLS
     - TTL (Time-to-live) cache on edge locations
     - Edge Locations are different than AZ and regions
     - You can delete the objects cached in CloudFront, but it will be charged.
-  
+
+## Storage Gateway
+- Provides way to access AWS storage infrastructure from on-premises software appliances
+- A virtual appliance (available to download virtual machine image) installed on the on-premises as hypervisor 
+- Propogates data from your on-premises data center to S3/Glaciar
+- Types of storage gateway:
+  - **File Gateway (NFS)**
+    - For storing flat files only
+  - **Volumes Gateway** (iSCSI- block based storate like a virtual hard disk)
+    - This is block storage (can be used for OS, applications, etc.), It has two types:
+      - Stored Volumes:
+        - Data is stored locally (on-prem hard disks) and then backed up into S3 in the form of Amazon EBS (incremental) snapshots asynchronously
+        - 1GB to 16TB in size for stored volumes
+        - Needs more storage capacity on-prem
+      - Cached Volumes:
+        - S3 is primary data storage and frequently accessed data is cached locally in your storage gateway providing low-latency access to frequently accessed data from on-prem
+        - You can create storage volumes from 1GB to 32TB and attach them as iSCSI devices from on-prem app servers
+        - Needs less storage capacity on-prem compared to Stored Volumes
+  - **Tape Gateway (Virtual Tape Library- VTL)** - Backup/archival using virtual tapes
+    - Cost-effective durable solution for archiving data in AWS
+ 
 ## Elastic Compute Cloud
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
