@@ -187,7 +187,7 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
 #### Data At Rest
 ##### Server Side Encryption
 - **AWS provided keys (SSE-S3)**
-  - Every object is encrypted with a unique key using AES-256 encryption standard. Each unique key is encrypted with a regularly rotating master key
+  - Every object is encrypted with a unique key using `AES-256` encryption standard. Each unique key is encrypted with a regularly rotating master key
   - Enable `Default Encryption` on bucket to enable encryption or use a bucket policy to enable encryption on all the objects stored in a bucket. The `x-amz-server-side-encryption` can be used in bucket policy to `deny` upload to the bucket if the request does not contain `x-amz-server-side-encryption: AES256` request header. In case of using REST API POST method, `x-amz-server-side-encryption: AES256` should be passed as form field and not in request header.
   - We can't enforce SSE-S3 with presigned URLs
   
@@ -204,13 +204,19 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
 ##### Default Encryption
 It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted with the chosen default encryption.
 
-#### Data In Transit
 ##### Client Side Encryption
 - Encrypt data before uploading to S3. There are two options available:
   - Use AWS KMS-Managed customer master key
   - Use client-side master key
+  
+#### Data In Transit
+Using SSL/TLS
 
 ### Security
+- By default, all S3 buckets are PRIVATE
+- Available security options can be through-
+  - Bucket Policies
+  - Access Control Lists (ACL)
 - [AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html)
   - Monitors and records S3 configurations. Notifies when config is not compliant to internal guidelines
   - Auditing and SNS notifications
@@ -315,19 +321,22 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
   - **Multipart upload API:** FOr uploading large objects
   - **Range GETs:** `GET` performance optimization with CloudFront
   - **S3 Inventory:** For optimizing *list objects and their meta-data* operation instead of using list API
-  - Request Rate Performance(on a single partition):
+  - **Request Rate Performance(on a single partition):**
     - 3500 `PUT/POST/DELETE` combined requests per second
     - 5500 `GET` requests per second
     - Amazon *automatically* uses multiple partitions if the no. of requests exceed the above limits to avoid seeing `HTTP 500` error codes. You can also do pre-partitioning of data (work with AWS Support)
-  - Parallalization:
+  - **Parallalization:**
      - Parallal uploads
      - Multiplart uploads (consider this when oject size exceeds 100MB)
      - Multipart downloads (`TransferManager` class of S3 Java SDK)
-  - Amazon S3 Select: Retrieve only a subset of data based on a SQL expression
+  - **Amazon S3 Select:** Retrieve only a subset of data based on a SQL expression
     - Lesser data --> Lesser Cost (Pay-as-you-go)
     - Available as API (Like `GET` requests)
     - Used with- AWS Tools and SDKS, AWS CLI and AWS S3 Console (S3 console data access limits to 40 MB)
-  - Amazon CloudFront
+  - **Amazon CloudFront**
+    - TTL (Time-to-live) cache on edge locations
+    - Edge Locations are different than AZ and regions
+    - You can delete the objects cached in CloudFront, but it will be charged.
   
 ## Elastic Compute Cloud
 ### AWS services that are specific to a region
