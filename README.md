@@ -347,7 +347,7 @@ Using SSL/TLS
 - Types of storage gateway:
   - **File Gateway (NFS)**
     - For storing flat files only
-  - **Volumes Gateway** (iSCSI- block based storate like a virtual hard disk)
+  - **Volumes Gateway** (iSCSI- block based storage like a virtual hard disk)
     - This is block storage (can be used for OS, applications, etc.), It has two types:
       - Stored Volumes:
         - Data is stored locally (on-prem hard disks) and then backed up into S3 in the form of Amazon EBS (incremental) snapshots asynchronously
