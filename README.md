@@ -40,6 +40,7 @@ Sample IAM policy for allowing PUT object action on Amazon S3 bucket:
 - Unlimited Storage
 - All objects(files) are stored in buckets and bucket namespaces have to be unique universally.
 - S3 Bucket Format: `https://s3-<aws_region>.amazonaws.com/<bucket-name>`
+
 ### S3 Usage Patterns (When to use S3)
 1. Store and distribute static web content and media
 2. Host entire static web sites
@@ -69,6 +70,7 @@ Amazon S3 Standard has three pricing components:
 2. **S3 Infrequently Accessed (S3-IA):** For data less frequently accessed, but needs faster retrieval when required. Charged for retrieval fee.
 3. **S3 Infrequently Accessed One Zone (S3 One zone-IA):** S3-IA with no redundancy as it spans in only one AZ.
 4. **Glacier:** For data archival. Typical retrieval time will be 3-5 hours.
+5. **Reduced Redundancy Storage (S3 RRS):** Reduced Redundancy Storage (RRS) is an Amazon S3 storage option that enables customers to store noncritical, reproducible data at lower levels of redundancy than Amazon S3’s standard storage. Designed to provide 99.99% durability and 99.99% availability of objects over a given year. Designed to sustain the loss of data in a single facility.
 
 ### S3 Data Consistency Model
 **Read-after-write** for HTTP `GET`/`LIST` operation after object is written(`PUT`) to S3 bucket successfully. However, if HTTP `GET`/`HEAD` request is made before object is written to S3 bucket, then S3 ensures **eventually consistent data model for read-after-write**.
