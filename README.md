@@ -36,6 +36,10 @@ Sample IAM policy for allowing PUT object action on Amazon S3 bucket:
 > **Note:** IAM policy has three main parts: Action, Effect and Resource. An IAM policy DOESN'T have principal.
 
 ## Simple Storage Service
+- Object based storage (0TB to 5TB file sizes)
+- Unlimited Storage
+- All objects(files) are stored in buckets and bucket namespaces have to be unique universally.
+- S3 Bucket Format: `https://s3-<aws_region>.amazonaws.com/<bucket-name>`
 ### S3 Usage Patterns (When to use S3)
 1. Store and distribute static web content and media
 2. Host entire static web sites
@@ -60,10 +64,16 @@ Amazon S3 Standard has three pricing components:
 * data transfer in or out (per GB per month)
 * requests (per thousand requests per month)
 
-### S3 Data Consistency Model
-**Read-after-write** for HTTP GET/LIST after object is written to S3 bucket successfully. However, if HTTP GET/HEAD request is made before object is written to S3 bucket, then S3 ensures **eventually consistent data moedl for read-after-write**.
+### S3 Storage Classes
+1. **S3 Standard:** 99.99% availability, 99.999999999% durability, can sustain loss of 2 AZs concurrently
+2. **S3 Infrequently Accessed (S3-IA):** For data less frequently accessed, but needs faster retrieval when required. Charged for retrieval fee.
+3. **S3 Infrequently Accessed One Zone (S3 One zone-IA):** S3-IA with no redundancy as it spans in only one AZ.
+4. **Glacier:** For data archival. Typical retrieval time will be 3-5 hours.
 
-**Eventual consistency** also applies to overwrite PUTs and DELETEs in all regions. This is due to S3's high availability (replication) takes some time to propogate the PUT/DELETE overwrite across all AZs.
+### S3 Data Consistency Model
+**Read-after-write** for HTTP `GET`/`LIST` operation after object is written(`PUT`) to S3 bucket successfully. However, if HTTP `GET`/`HEAD` request is made before object is written to S3 bucket, then S3 ensures **eventually consistent data model for read-after-write**.
+
+**Eventual consistency** also applies to **overwrite** `PUT`s and `DELETE`s in all regions. This is due to S3's high availability (replication) takes some time to propogate the PUT/DELETE overwrite across all AZs.
 
 ### Interfaces
 1. **AWS Console:**
@@ -130,12 +140,11 @@ CORS can be configured using a XML config file that can contain 100 CORS rules.U
 #### Bucket Policies
 
 > Control who can access this bucket.
-
+- Use to make entire bucket public
 - Bucket Policies are similar to IAM policy but are applied to AWS resources (S3 in this case). Hence it will also have *principal* defined in the policy as opposed to IAM policies. 
 - Bucket policies can also have *conditions*. Condition values can be date, time, ARN of requester, IP of requester, user name, user id and user agent. S3 policy also support conditions using `object tags`.
-- Sample bucket policy:
-
 - Can be used to put size limit policies (upto 20KBs) on S3 buckets/objects.
+- Sample bucket policy:
 
 ```
 {
@@ -212,7 +221,7 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
   - Use client-side master key
   
 #### Data In Transit
-Using SSL/TLS
+- Using SSL/TLS
 
 ### Security
 - By default, all S3 buckets are PRIVATE
