@@ -8,6 +8,7 @@ Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-
 * [Storage Gateway](#storage-gateway)
 * [Snowball](#snowball)
 * [Elastic Compute Cloud (EC2)](#elastic-compute-cloud)
+* [Elastic Block Storage(EBS)](#elastic-block-storage)
 * [Exam structure in January 2019](#exam-structure-in-january-2019)
 
 ## Identity & Access Management
@@ -384,6 +385,44 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 - Import and export to/from S3
 
 ## Elastic Compute Cloud
+- Elastic Compute Cloud (EC2) provides 4 Pricing Options:
+  1. On Demand
+    - Pay per hour of usage without commitment
+    - Good for unpredictable load
+  2. Reserved
+    - Term: 1 or 3 years contract
+    - Purchase Options: No Upfront, Partial Upfront or All Upfront
+    - Offering Class: Standard(Up to 75% off on-demand), Convertible(Up to 54% off on-demand)
+    - Scheduled RIs
+    - Good for predictable loads
+  3. Spot
+    - Bid on the price
+    - Good for apps that are flexible with start and end times
+  4. Dedicated Hosts
+    - Physical servers dedicated for you
+    - Use your software licenses on these servers hosted in AWS
+    - Good for regulatory requirements which may not support multi-tenancy
+
+## Elastic Block Storage
+- Think of Elastic Block Storage (EBS) as a virtual disk in AWS cloud. EBS is attached to an EC2 instance.
+- EBS Volume Types:
+  - General Purpose SSD(GP2)
+    - Up to 10000 IOPs
+  - Provisioned IOPS SSD(IO1)
+    - More than 10000 IOPS upto 25000 IOPS per EBS volume
+  - Throughput Optimized HDD(ST1)
+    - Can't be a bootable volume
+  - Magnetic:
+    - Cold HDD
+      - Lowest Cost HDD volume. Good for less frequently accessed workloads
+      - Can't be a bootable volume
+      - Can be used as file server
+    - Magnetic (Standard): Previous Generation but still can be used.
+      - Can be a boot volume
+    - Throuhput Optimized HDD: Low cost HDD. Good for frequently accessed, throughput-intesive workloads
+    
+- There are many EC2 instance types otimized for specific kind of work loads (e.g. memory optimized, IO optimized, CPU optimized, etc.)
+
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
 
