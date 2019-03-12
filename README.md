@@ -462,3 +462,24 @@ The below AWS services are specific to a AWS region. E.g. If you plan to launch 
 2. IAM Keys
 
 ## Exam Structure In January 2019
+One of my colleagues passed the AWS Certified Solutions Architect Associate Exam in January 2019. Following are the tips from her based on the questions appeared in the exam:
+Important Topics:
+- S3
+- EC2
+- VPC
+- CloudFormation
+- Elastic Beanstalk
+- Kinesis
+- RDS
+- Encryption
+
+**Some questions appeared on AWS Certified Solutions Architect Associate Exam in January 2019:**
+1. CloudFormation templates structure in json format was given to check if those are valid templates
+2. Which database to use in order for the application to be fully managed, highly scalable, n latency in milliseconds?
+3. In order to give end user low latency why do you attach Cloudfront on S3 and why not on EC2?
+4. How will you make your EC2 application more disaster recoverable. (copy to another AZ, Region, take snapshots)?
+5. How will you encrypt data at rest (SSL,KMS,STS)?
+6. How will you encrypt data in transit in S3?
+7. How will you encrypt data in S3 if you dont want to manage keys and what will you use if you want to manage keys?
+8. Your data is infrequently accessed. What will be the cheapest solution by which you can retrieve data within milliseconds?
+9. Database tier needs access to web tier and web tier needs access to internet; what needs to be done?
