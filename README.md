@@ -9,6 +9,8 @@ Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-
 * [Snowball](#snowball)
 * [Elastic Compute Cloud (EC2)](#elastic-compute-cloud)
 * [Elastic Block Storage(EBS)](#elastic-block-storage)
+* [Elastic Load Balancer(ELB)](#elastic-load-balancer)
+* [Cloudwatch](#cloudwatch)
 * [Exam structure in January 2019](#exam-structure-in-january-2019)
 
 ## Identity & Access Management
@@ -423,6 +425,13 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
     
 - There are many EC2 instance types otimized for specific kind of work loads (e.g. memory optimized, IO optimized, CPU optimized, etc.)
 
+## Elastic Load Balancer
+- Three types of Elastic Load Balancers(ELBs):
+  1. Application Load Balancer
+  2. Network Load Balancer
+  3. Elastic Load Balancer
+
+## Cloudwatch
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
 
