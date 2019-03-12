@@ -431,19 +431,23 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 1. **Application Load Balancer(ALB):** 
   - Works on request level (Application Layer of Open Systems Interconnection(OSI) network model). Handles HTTP/HTTPS traffic optimally.
   - Needs that Security Groups are configured to allow specific traffic to the ALB. You cab use existing SG or create a new SG.
-  - Target Types can be- 1. Instance 2. IP or 3. Lambda Function
+  - **Target Types** can be- 1. **Instance** 2. **IP** or 3. **Lambda Function**
     - Health checks will count as a request for your Lambda function. This means that it will impact cost of lambda function.
-  - Health Check Path should be a valid URI(must start with `/`) that points to a resource which exists in the web app
+  - Health Check Path should be a valid URI(must start with `/`) that points to a resource which exists in the web app e.g. `/index.html` or `/healthcheck.html`
+
 2. **Network Load Balancer(NLB):** 
   - Works on Network Level of OSI model. Handles millions of TCP requests per second securely(TLS) with ultra-high performance.
   - Does not need Security Groups configuration to allow traffic to the NLB itself.
     - The security groups for your instances must allow traffic from the VPC CIDR on the health check port
-  - Target Types can be- 1. Instance or 2. IP 
+  - **Target Types** can be- 1. **Instance** or 2. **IP**  
   - Health Check is not a path but it is the port on which traffic is allowed on NLB or can be a different port
+  - You may also add one Elastic IP per Availability Zone if you wish to have specific addresses for your load balancer.
+
 3. **Classic Load Balancer(usually referred as ELB):** 
   - For both HTTP/HTTPS and TCP. Choose a Classic Load Balancer when you have an existing application running in the EC2-Classic network.
 
 - For internet-facing load balancers, the IPv4 addresses of the nodes are assigned by AWS. For internal load balancers, the IPv4 addresses are assigned from the subnet CIDR.
+- You must select at least two Subnets in different Availability Zones to provide higher availability for your load balancer
 
 ## Cloudwatch
 
