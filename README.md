@@ -40,6 +40,12 @@ Sample IAM policy for allowing PUT object action on Amazon S3 bucket:
 ```
 > **Note:** IAM policy has three main parts: Action, Effect and Resource. An IAM policy DOESN'T have principal.
 
+### IAM Roles
+- Global service
+- Use IAM Roles instead of using AWS access and private key to access AWS services programmatically (using CLI, API, etc.)
+  - E.g. Attach an IAM role to EC2 instance that allows admin access to S3. Then, when you SSH into this EC2 instance, you can run AWS CLI commands like `aws s3 ls` from this EC2 instance without needing to configure AWS CLI with the AWS access key and private key(
+- IAM Role can be attached to a running EC2 instance too now
+
 ## Simple Storage Service
 - Object based storage (0TB to 5TB file sizes)
 - Unlimited Storage
@@ -451,7 +457,7 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 - You must select at least two Subnets in different Availability Zones to provide higher availability for your load balancer
 
 ## Cloudwatch
-
+- 
 
 ## Virtual Private Cloud And Other Services
 - You can specify only one subnet per Availability Zone
@@ -459,10 +465,13 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 ## Other Notes
 
 ### AWS services that are specific to a region
-The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
-
+The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region:
 1. Security Groups
 2. IAM Keys
+
+### AWS services that are *NOT* specific to a region
+1. IAM Roles
+2. [Amazon S3](#simple-storage-service)
 
 ## Exam Structure In January 2019
 One of my colleagues passed the AWS Certified Solutions Architect Associate Exam in January 2019. Following are the tips from her based on the questions appeared in the exam:
