@@ -53,15 +53,15 @@ Sample IAM policy for allowing PUT object action on Amazon S3 bucket:
 
 ### When NOT to use S3:
 1. As a file system
-  - Use AWS EFS instead
+    - Use AWS EFS instead
 2. Strucured data with queries
-  - Use RDS, DynamoDB or Amazon CloudSearch
+    - Use RDS, DynamoDB or Amazon CloudSearch
 3. Rapidly/Frequently Changing Data
-  - Use RDS, DynamoDB, EFS or Amazon CloudSearch
+    - Use RDS, DynamoDB, EFS or Amazon CloudSearch
 4. Archival
-  - Use Amazon Glacier
+    - Use Amazon Glacier
 5. Dynamic Website Hosting
-  - Use EC2 or EFS
+    - Use EC2 or EFS
   
 ### S3 Cost Model
 Amazon S3 Standard has three pricing components: 
