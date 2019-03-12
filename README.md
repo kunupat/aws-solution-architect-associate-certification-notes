@@ -3,7 +3,7 @@
 Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-Architect-Associate-Certification.html) for a listing of material and useful links to pass AWS Solutions Architect February 2018 Associate Level Certification exam.
 
 ## Contents
-* [Identity & Access Management (IAM)](#identity-&-access-management)
+* [Identity and Access Management (IAM)](#identity-and-access-management)
 * [Simple Storage Service (S3)](#simple-storage-service)
 * [Storage Gateway](#storage-gateway)
 * [Snowball](#snowball)
@@ -14,7 +14,7 @@ Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-
 * [Virtual Private Cloud And Other Services](#virtual-private-cloud-and-other-services)
 * [Exam structure in January 2019](#exam-structure-in-january-2019)
 
-## Identity & Access Management
+## Identity and Access Management
 ### IAM Policies
 
 > Control what this user can do in AWS.
