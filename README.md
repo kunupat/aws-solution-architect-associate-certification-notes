@@ -11,6 +11,7 @@ Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-
 * [Elastic Block Storage(EBS)](#elastic-block-storage)
 * [Elastic Load Balancer(ELB)](#elastic-load-balancer)
 * [Cloudwatch](#cloudwatch)
+* [Virtual Private Cloud And Other Services](#virtual-private-cloud-and-other-services)
 * [Exam structure in January 2019](#exam-structure-in-january-2019)
 
 ## Identity & Access Management
@@ -388,22 +389,22 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 
 ## Elastic Compute Cloud
 - Elastic Compute Cloud (EC2) provides 4 Pricing Options:
-  1. On Demand
-    - Pay per hour of usage without commitment
-    - Good for unpredictable load
-  2. Reserved
-    - Term: 1 or 3 years contract
-    - Purchase Options: No Upfront, Partial Upfront or All Upfront
-    - Offering Class: Standard(Up to 75% off on-demand), Convertible(Up to 54% off on-demand)
-    - Scheduled RIs
-    - Good for predictable loads
-  3. Spot
-    - Bid on the price
-    - Good for apps that are flexible with start and end times
-  4. Dedicated Hosts
-    - Physical servers dedicated for you
-    - Use your software licenses on these servers hosted in AWS
-    - Good for regulatory requirements which may not support multi-tenancy
+1. On Demand
+  - Pay per hour of usage without commitment
+  - Good for unpredictable load
+2. Reserved
+  - Term: 1 or 3 years contract
+  - Purchase Options: No Upfront, Partial Upfront or All Upfront
+  - Offering Class: Standard(Up to 75% off on-demand), Convertible(Up to 54% off on-demand)
+  - Scheduled RIs
+  - Good for predictable loads
+3. Spot
+  - Bid on the price
+  - Good for apps that are flexible with start and end times
+4. Dedicated Hosts
+  - Physical servers dedicated for you
+  - Use your software licenses on these servers hosted in AWS
+  - Good for regulatory requirements which may not support multi-tenancy
 
 ## Elastic Block Storage
 - Think of Elastic Block Storage (EBS) as a virtual disk in AWS cloud. EBS is attached to an EC2 instance.
@@ -427,11 +428,29 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 
 ## Elastic Load Balancer
 - Three types of Elastic Load Balancers(ELBs):
-  1. Application Load Balancer
-  2. Network Load Balancer
-  3. Elastic Load Balancer
+1. **Application Load Balancer(ALB):** 
+  - Works on request level (Application Layer of Open Systems Interconnection(OSI) network model). Handles HTTP/HTTPS traffic optimally.
+  - Needs that Security Groups are configured to allow specific traffic to the ALB. You cab use existing SG or create a new SG.
+  - Target Types can be- 1. Instance 2. IP or 3. Lambda Function
+    - Health checks will count as a request for your Lambda function. This means that it will impact cost of lambda function.
+  - Health Check Path should be a valid URI(must start with `/`) that points to a resource which exists in the web app
+2. **Network Load Balancer(NLB):** 
+  - Works on Network Level of OSI model. Handles millions of TCP requests per second securely(TLS) with ultra-high performance.
+  - Does not need Security Groups configuration to allow traffic to the NLB itself.
+    - The security groups for your instances must allow traffic from the VPC CIDR on the health check port
+  - Target Types can be- 1. Instance or 2. IP 
+  - Health Check is not a path but it is the port on which traffic is allowed on NLB or can be a different port
+3. **Classic Load Balancer(usually referred as ELB):** 
+  - For both HTTP/HTTPS and TCP. Choose a Classic Load Balancer when you have an existing application running in the EC2-Classic network.
+
+- For internet-facing load balancers, the IPv4 addresses of the nodes are assigned by AWS. For internal load balancers, the IPv4 addresses are assigned from the subnet CIDR.
 
 ## Cloudwatch
+
+
+## Virtual Private Cloud And Other Services
+- You can specify only one subnet per Availability Zone
+- 
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
 
