@@ -12,6 +12,7 @@ Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-
 * [Elastic Load Balancer(ELB)](#elastic-load-balancer)
 * [Cloudwatch](#cloudwatch)
 * [Virtual Private Cloud And Other Services](#virtual-private-cloud-and-other-services)
+* [Other Notes](#other-notes)
 * [Exam structure in January 2019](#exam-structure-in-january-2019)
 
 ## Identity and Access Management
@@ -454,7 +455,9 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 
 ## Virtual Private Cloud And Other Services
 - You can specify only one subnet per Availability Zone
-- 
+ 
+## Other Notes
+
 ### AWS services that are specific to a region
 The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region.
 
