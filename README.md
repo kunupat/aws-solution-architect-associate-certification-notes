@@ -25,6 +25,7 @@ Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-
 * [Kinesis](#kinesis)
 * [CloudFormation](#cloudformation)
 * [Elastic Container Service(ECS)](#elastic-container-service)
+* [Elastic Beanstalk](#elastic-beanstalk)
 * [Other Notes](#other-notes)
 * [Exam structure in January 2019](#exam-structure-in-january-2019)
 
@@ -500,6 +501,8 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 ## CloudFormation
 
 ## Elastic Container Service
+
+## Elastic Beanstalk
 
 ## Other Notes
 
