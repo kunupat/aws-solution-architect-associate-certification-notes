@@ -500,6 +500,8 @@ You can launch or start instances in a placement group (to achieve high throughp
 
 - For internet-facing load balancers, the IPv4 addresses of the nodes are assigned by AWS. For internal load balancers, the IPv4 addresses are assigned from the subnet CIDR.
 - You must select at least two Subnets in different Availability Zones to provide higher availability for your load balancer
+- ELBs are always resolved with DNS name as they don't have pre-defined IPv4 addresses
+- If you want to point a domain name like `www.example.com` to an ELB(which itself can only be accessed using its DNS), you need to use Route53's Alias Record
 
 ## Elastic File Service
 - Supports NFS v4 protocol
@@ -533,6 +535,11 @@ You can launch or start instances in a placement group (to achieve high throughp
 
 ## Route 53
 - Domain Name Service (DNS) by AWS
+- Provides DNS Types: A Records, CNAME records(Canonical Name), Alias Records
+- CNAME maps one DNS to other DNS (`http://m.example.com` to `http://mobile.example.com`)
+- Alias Records are same as CNAME Records with a key difference:
+  - CNAME record cannot point to a naked domain name like `http://example.com`. Use Alias Record for this
+
 ## Databases
 
 ## Simple Queue Service
@@ -564,6 +571,7 @@ The below AWS services are specific to a AWS region. E.g. If you plan to launch 
 1. IAM Roles
 2. [Amazon S3](#simple-storage-service)
 3. Lambda functions can do things globally (e.g. access S3 buckets globally)
+4. Route 53
 
 ## Exam Structure In January 2019
 One of my colleagues passed the AWS Certified Solutions Architect Associate Exam in January 2019. Following are the tips from her based on the questions appeared in the exam:
