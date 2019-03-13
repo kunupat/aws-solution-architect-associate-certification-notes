@@ -8,10 +8,23 @@ Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-
 * [Storage Gateway](#storage-gateway)
 * [Snowball](#snowball)
 * [Elastic Compute Cloud (EC2)](#elastic-compute-cloud)
-* [Elastic Block Storage(EBS)](#elastic-block-storage)
-* [Elastic Load Balancer(ELB)](#elastic-load-balancer)
+* [Autoscaling](#autoscaling)
+* [Elastic Block Storage (EBS)](#elastic-block-storage)
+* [Elastic Load Balancer (ELB)](#elastic-load-balancer)
+* [Elastic File System (EFS)](#elastic-file-service)
+* [Lambda Functions](#lambda-functions)
 * [Cloudwatch](#cloudwatch)
-* [Virtual Private Cloud And Other Services](#virtual-private-cloud-and-other-services)
+* [Virtual Private Cloud (VPC) And Other Services](#virtual-private-cloud-and-other-services)
+* [Route 53](#route-53)
+* [Databases](#databases)
+* [Simple Queue Service (SQS)](#simple-queue-service)
+* [Simple Workflow Service (SWF)](#simple-workflow-service)
+* [Simple Notification Service (SNS)](#simple-notification-service)
+* [Elastic Transcoder](#elastic-transcoder)
+* [API Gateway](#api-gateway)
+* [Kinesis](#kinesis)
+* [CloudFormation](#cloudformation)
+* [Elastic Container Service(ECS)](#elastic-container-service)
 * [Other Notes](#other-notes)
 * [Exam structure in January 2019](#exam-structure-in-january-2019)
 
@@ -413,6 +426,8 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
   - Use your software licenses on these servers hosted in AWS
   - Good for regulatory requirements which may not support multi-tenancy
 
+## Autoscaling
+
 ## Elastic Block Storage
 - Think of Elastic Block Storage (EBS) as a virtual disk in AWS cloud. EBS is attached to an EC2 instance.
 - EBS Volume Types:
@@ -456,12 +471,36 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 - For internet-facing load balancers, the IPv4 addresses of the nodes are assigned by AWS. For internal load balancers, the IPv4 addresses are assigned from the subnet CIDR.
 - You must select at least two Subnets in different Availability Zones to provide higher availability for your load balancer
 
+## Elastic File Service
+
+## Lambda Functions
+
 ## Cloudwatch
-- 
+
 
 ## Virtual Private Cloud And Other Services
 - You can specify only one subnet per Availability Zone
- 
+
+## Route 53
+
+## Databases
+
+## Simple Queue Service
+
+## Simple Workflow Service
+
+## Simple Notification Service
+
+## Elastic Transcoder
+
+## API Gateway
+
+## Kinesis
+
+## CloudFormation
+
+## Elastic Container Service
+
 ## Other Notes
 
 ### AWS services that are specific to a region
