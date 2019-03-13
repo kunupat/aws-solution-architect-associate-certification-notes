@@ -436,12 +436,19 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 - When you launch an instance, the root device volume contains the image used to boot the instance. When Amazon EC2 was introduced, all AMIs were backed by Amazon EC2 instance store, which means the root device for an instance launched from the AMI is an instance store volume created from a template stored in Amazon S3.
 - Get Instance Meta-data: CURL URL: `http://169.254.169.254/latest/meta-data/`
 - Get Instance User Data: CURL URL: `http://169.254.169.254/latest/user-data/`
-- **Placement Groups:**
+
+- **EC2 Placement Groups:**
 You can launch or start instances in a placement group (to achieve high throughput and low latency), which determines how instances are placed on underlying hardware. When you create a placement group, you specify one of the following strategies for the group:
   - **Cluster** – clusters instances into a low-latency group in a single Availability Zone
   - **Partition** – spreads instances across logical partitions, ensuring that instances in one partition do not share underlying hardware with instances in other partitions
-  - **Spread** – spreads instances across underlying hardware
+  - **Spread** – spreads instances across underlying hardware. Can spread across multiple AZs.
 - There is no charge for creating a placement group
+- Notes: 
+  - Can't move existing instance into a placement group
+  - Can't merge placement groups
+  - Not all instance types can be launched in a placement group
+  - Name of a placement group must be unique in an AWS account
+  
 
 ## Autoscaling
 
@@ -503,7 +510,10 @@ You can launch or start instances in a placement group (to achieve high throughp
 
 ## Lambda Functions
 - A compute service without managing any server, os, etc.
-- Lambdas respond to event triggers like API Gateways, SNS, other lambda functions, etc.
+- Lambdas respond to event triggers like API Gateways, SNS, other lambda functions, etc. [remember the triggers](https://docs.aws.amazon.com/lambda/latest/dg/lambda-services.html)
+- Lambda Functions scale out automatically
+- **Scale out means:** Each event/request/invocation of a lambda function creates 1 Lambda function instance which is independent of other lambda function instances running concurrently
+- Use AWS X-ray to debug Lambda Functions
 
 ## Cloudwatch
 - Standard monitoring frequency= 5 minutes
@@ -512,10 +522,17 @@ You can launch or start instances in a placement group (to achieve high throughp
 - Cloudwatch has- Dashboards, Alarms, Events and Logs
 
 ## Virtual Private Cloud And Other Services
-- You can specify only one subnet per Availability Zone
+- You can specify only one subnet per AZ
+
+### Security Groups (SG)
+  - Only `ALLOW` rules can be specified using SGs. There are no `DENY` rules.
+  - All inbound traffic is blocked by default
+  - All outbound traffic is allowed by default
+  - Security groups are stateful. That is, if you create inbound rule to allow traffic in, that traffic is automatically allowed to go back out
+  - Can't use SG to block specific IPs. Use Network Access Control Lists for this purpose
 
 ## Route 53
-
+- Domain Name Service (DNS) by AWS
 ## Databases
 
 ## Simple Queue Service
