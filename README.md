@@ -410,22 +410,38 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 
 ## Elastic Compute Cloud
 - Elastic Compute Cloud (EC2) provides 4 Pricing Options:
-1. On Demand
+1. **On Demand Instances**
   - Pay per hour of usage without commitment
   - Good for unpredictable load
-2. Reserved
+2. **Reserved Instances**
   - Term: 1 or 3 years contract
   - Purchase Options: No Upfront, Partial Upfront or All Upfront
   - Offering Class: Standard(Up to 75% off on-demand), Convertible(Up to 54% off on-demand)
   - Scheduled RIs
   - Good for predictable loads
-3. Spot
+3. **Spot Instances**
   - Bid on the price
   - Good for apps that are flexible with start and end times
-4. Dedicated Hosts
+4. **Dedicated Hosts**
   - Physical servers dedicated for you
   - Use your software licenses on these servers hosted in AWS
   - Good for regulatory requirements which may not support multi-tenancy
+- Termination Protection is turned off by default
+- Default delete action for EBS-backed EC2 instance termination is that the root EBS volume to be deleted when the instance is terminated
+- EBS-backed Root Volumes can be encrypted using AWS API, console or using third party tool like bit locker
+- Instance store volumes are ephemeral. That is they are deleted when the associated instance is terminated or there is a failure in the underlying host. Instance store volumes cannot be stopped
+- EBS backed instances can be stopped. That is, you will not loose data on this instance if it is stopped.
+- You can reboot both volume types without loosing the data on reboot
+- By degfault, both ROOT volumes will be deleted on termination. However, with EBS volumes, you can tell AWS to keep the root device volume
+- When you launch an instance, the root device volume contains the image used to boot the instance. When Amazon EC2 was introduced, all AMIs were backed by Amazon EC2 instance store, which means the root device for an instance launched from the AMI is an instance store volume created from a template stored in Amazon S3.
+- Get Instance Meta-data: CURL URL: `http://169.254.169.254/latest/meta-data/`
+- Get Instance User Data: CURL URL: `http://169.254.169.254/latest/user-data/`
+- **Placement Groups:**
+You can launch or start instances in a placement group (to achieve high throughput and low latency), which determines how instances are placed on underlying hardware. When you create a placement group, you specify one of the following strategies for the group:
+  - **Cluster** – clusters instances into a low-latency group in a single Availability Zone
+  - **Partition** – spreads instances across logical partitions, ensuring that instances in one partition do not share underlying hardware with instances in other partitions
+  - **Spread** – spreads instances across underlying hardware
+- There is no charge for creating a placement group
 
 ## Autoscaling
 
@@ -439,7 +455,7 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
   - Throughput Optimized HDD(ST1)
     - Can't be a bootable volume
   - Magnetic:
-    - Cold HDD
+    - Cold HDD (SC1)
       - Lowest Cost HDD volume. Good for less frequently accessed workloads
       - Can't be a bootable volume
       - Can be used as file server
@@ -448,6 +464,12 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
     - Throuhput Optimized HDD: Low cost HDD. Good for frequently accessed, throughput-intesive workloads
     
 - There are many EC2 instance types otimized for specific kind of work loads (e.g. memory optimized, IO optimized, CPU optimized, etc.)
+- 1 EBS volume cannot be mounted to multiple EC2 instances.(use [EFS](#elastic-file-service) instead as an EFS mounted volume can be shared by multiple EC2 instances)
+- Snapshots are copies of EBS volumes taken at a given point of time. Volumes exist on EBS and snapshots exist on S3
+- Snapshots are incremental
+- Snapshots of encrypted volumes are also encrypted automatically
+- Encrypted snapshots cannot be shared
+- The EC2 instance should be terminated before you can take snapshot of the EBS Root volumes attached to it
 
 ## Elastic Load Balancer
 - Three types of Elastic Load Balancers(ELBs):
@@ -473,11 +495,21 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 - You must select at least two Subnets in different Availability Zones to provide higher availability for your load balancer
 
 ## Elastic File Service
+- Supports NFS v4 protocol
+- Pay for the storage used (no pre-provisioning needed)
+- Scales upto petabytes
+- Supports thousands of concurrent NFS connections
+- Read-after-write consistency model
 
 ## Lambda Functions
+- A compute service without managing any server, os, etc.
+- Lambdas respond to event triggers like API Gateways, SNS, other lambda functions, etc.
 
 ## Cloudwatch
-
+- Standard monitoring frequency= 5 minutes
+- Detailed monitoring frequencey = 1 minute (will be billed for this)
+- Cloudwatch is for performance monitoring. CloutTrail is for auditing actions done on AWS
+- Cloudwatch has- Dashboards, Alarms, Events and Logs
 
 ## Virtual Private Cloud And Other Services
 - You can specify only one subnet per Availability Zone
@@ -514,6 +546,7 @@ The below AWS services are specific to a AWS region. E.g. If you plan to launch 
 ### AWS services that are *NOT* specific to a region
 1. IAM Roles
 2. [Amazon S3](#simple-storage-service)
+3. Lambda functions can do things globally (e.g. access S3 buckets globally)
 
 ## Exam Structure In January 2019
 One of my colleagues passed the AWS Certified Solutions Architect Associate Exam in January 2019. Following are the tips from her based on the questions appeared in the exam:
