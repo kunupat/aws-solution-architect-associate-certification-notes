@@ -538,7 +538,15 @@ You can launch or start instances in a placement group (to achieve high throughp
 - Provides DNS Types: A Records, CNAME records(Canonical Name), Alias Records
 - CNAME maps one DNS to other DNS (`http://m.example.com` to `http://mobile.example.com`)
 - Alias Records are same as CNAME Records with a key difference:
-  - CNAME record cannot point to a naked domain name like `http://example.com`. Use Alias Record for this
+  - CNAME record cannot point to a naked domain name like `http://example.com`. Use Alias Record for this purpose.
+- **Routing Policies:**
+1. Simple Routing: One A Record with multiple IPs in it. (Randomly picks IP from the given set of IPs)
+2. Weighted Routing: Set weights for different IPs. E.g 20% to a server hosted in US-EAST-1 and 80% to a server hosted in EU-WEST-1
+3. Latency-based Routing: Route requests to a server IP that will have lowest latency
+4. Failover Routing: Primary and Passive sites. Failover to secondary site if primary site goes down. Uses health checks to determine if primart site is down
+5. Geolocation-based Routing: Figures out location of users and accordingly route the request to a server IP setup for serving that geolocation
+6. Multivalue Answer Routing: Has multiple(up to 8 records) records for single DNS to IPs mapping. You can setup health checks for each of the IP. (Randomly picks from DNS records)
+- Number of domains that can be managed using Route53 is 50, by default. However, this is soft limit and it can be extended by contacting AWS support
 
 ## Databases
 
