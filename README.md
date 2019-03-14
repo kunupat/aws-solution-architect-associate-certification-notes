@@ -545,11 +545,65 @@ You can launch or start instances in a placement group (to achieve high throughp
 3. Latency-based Routing: Route requests to a server IP that will have lowest latency
 4. Failover Routing: Primary and Passive sites. Failover to secondary site if primary site goes down. Uses health checks to determine if primart site is down
 5. Geolocation-based Routing: Figures out location of users and accordingly route the request to a server IP setup for serving that geolocation
-6. Multivalue Answer Routing: Has multiple(up to 8 records) records for single DNS to IPs mapping. You can setup health checks for each of the IP. (Randomly picks from DNS records)
+6. Multivalue Answer Routing: Has multiple (up to 8 records) records for single DNS to IPs mapping. You can setup health checks for each of the IP. (Randomly picks from DNS records)
 - Number of domains that can be managed using Route53 is 50, by default. However, this is soft limit and it can be extended by contacting AWS support
 
 ## Databases
+- **RDS- Relational Database Service- OLTP (OnLine Transaction Processing). RDS Engines supported by AWS:**
+  - **MS SQL Server**
+    - SQL Server Express Edition
+    - SQL Server Web Edition
+    - SQL Server Standard Edition
+    - SQL Server Enterprise Edition
+    
+  - **MySQL**
+    - Open Source RDBMS. MySQL on RDS combines features of the community edition of MySQL and scaling flexibility provided by AWS
+    - Supports database size up to 32 TiB
+    - Supports General Purpose, Memory Optimized, and Burstable Performance instance classes
+    - Supports automated backup and point-in-time recovery
+    - Supports up to 5 Read Replicas per instance, within a single Region or cross-region
+    
+  - **PostgreSQL**
+    - Popular open source RDBMS known for reliability, stability and correctness
+    - High reliability and stability in a variety of workloads
+    - Advanced features to perform in high-volume environments
+    - Vibrant open-source community that releases new features multiple times per year
+    - Supports multiple extensions that add even more functionality to the database
+    - Supports up to 5 Read Replicas per instance, within a single Region or cross-region
+    - The most Oracle-compatible open-source database
+  
+  - **Oracle**
+    - Enterprise Edition
+    - Standard Edition
+    - Standard Edition One
+    - Standard Edition Two
+    
+  - **Amazon Aurora** 
+    - Amazon Aurora is a MySQL- and PostgreSQL-compatible enterprise-class database, starting at <$1/day.
+    - Up to 5 times the throughput of MySQL and 3 times the throughput of PostgreSQL
+    - Up to 64TiB of auto-scaling SSD storage
+    - 6-way replication across three Availability Zones
+    - Up to 15 Read Replicas with sub-10ms replica lag
+    - Automatic monitoring and failover in less than 30 seconds
+    
+  - **MariaDB**
+    - MySQL-compatible community edition
+    - Supports database size up to 32 TiB
+    - Supports General Purpose, Memory Optimized, and Burstable Performance instance classes
+    - Supports automated backup and point-in-time recovery
+    - Supports up to 5 Read Replicas per instance, within a single Region or cross-region
+    - Supports global transaction ID (GTID) and thread pooling
+    - Developed and supported by the MariaDB open source community
+ - RDS never gives a public IPv4 address to a DB instance. It always provides a DNS endpoint
+ 
+- **DynamoDB- No SQL**
 
+- **Redshift- Data Warehousing- OLAP (OnLine Analytical Processing)**
+
+- **ElastiCache- In-memory Caching. Cahching Engines supported by AWS:**
+  - **Redis**
+  - **Memcached**
+  
 ## Simple Queue Service
 
 ## Simple Workflow Service
