@@ -549,7 +549,7 @@ You can launch or start instances in a placement group (to achieve high throughp
 - Number of domains that can be managed using Route53 is 50, by default. However, this is soft limit and it can be extended by contacting AWS support
 
 ## Databases
-- **RDS- Relational Database Service- OLTP (OnLine Transaction Processing). RDS Engines supported by AWS:**
+### RDS- Relational Database Service- OLTP (OnLine Transaction Processing). RDS Engines supported by AWS
   - **MS SQL Server**
     - SQL Server Express Edition
     - SQL Server Web Edition
@@ -595,12 +595,62 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Supports global transaction ID (GTID) and thread pooling
     - Developed and supported by the MariaDB open source community
  - RDS never gives a public IPv4 address to a DB instance. It always provides a DNS endpoint
- 
-- **DynamoDB- No SQL**
 
-- **Redshift- Data Warehousing- OLAP (OnLine Analytical Processing)**
 
-- **ElastiCache- In-memory Caching. Cahching Engines supported by AWS:**
+#### RDS Automated Backups  
+  - Automated backups are enabled by default and are stored in S3. The size of S3 storage will be same as the size of the RDS instance
+  - Backups are taken in a pre-defined window. Storage IO may be suspended during backups and will result in latency
+  - Automated Backups will be deleted after deleting original RDS instance
+  - backup retention period can be 35 days at the max
+#### RDS Snapshots
+  - Snapshots are user intiaited
+  - Snapshots will not be deleted even after deleting original RDS instance
+
+#### Backups/Snapshots Restore
+  - A new RDS instance with new DNS endpoint will be created for the backup/snapshot restoration
+
+#### Encryption
+  - All RDS engines support data encryption at rest
+  - Encrypting is done using AWS KMS
+  - Enabling RDS instance encryption will also enable encryption of its autoamted backups, read replicas and snapshots for the data stored at rest
+  - Existing RDS instance cannot be encrypted. To encrypt existing RDS instance, take a snapshot of it, make a copy of the snapshot and encrypt the copy
+
+#### Multi-AZ Deployment
+  - Used for Disater Recovery (DR)
+  - AWS automatically reoplicates RDS instance into another AZ. Supports automatic failover to stanby replica
+  - Available for all RDS engines. Aurora DB is multi-AZ by default
+  - It is synchronous
+  
+#### Read Replicas
+  - Used for improving performance (scaling)
+  - Can have 5 read replicas of a production DB by default
+  - Read-only copies of prod DB
+  - It is asynchronous
+  - Not available for SQL Server and Oracle engines. Other 4 are supported
+  - Must have Automated Backups turned on to deploy Read Replicas
+  - Can create Read Replicas of Read Replicas (however, it adds latency)
+  - Each Read Replica will have its own DNS endpoint
+  - Can have Read Replicas that have multi-AZ enabled or even in Multi-Regions
+  - Read Replicas can be promoted to be their own DBs but this breaks replication
+
+### DynamoDB- No SQL
+  - Fully-managed, no-SQL DB with consistent, single-digit latency at any scale
+  - Supports both key-value and document data models
+  - Always stored on SSDs
+  - Consistency Models:
+    - Eventual Consistent Reads (Default)
+    - Strongly Consistent Reads
+  - Spread accross 3 geographically separate regions to achieve redudancy
+  - Pricing:
+    - Pricing is based on:
+      - Provisioned Throughput Capacity:
+        - Write Throughput $0.0065/hour for every 10 units
+        - Read Throughput $0.0065/hour for every 50 units
+      - Storage Costs:
+        - $0.25/GB/Month
+### Redshift- Data Warehousing- OLAP (OnLine Analytical Processing)
+
+### ElastiCache- In-memory Caching. Cahching Engines supported by AWS:
   - **Redis**
   - **Memcached**
   
