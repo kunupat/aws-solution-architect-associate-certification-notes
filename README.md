@@ -524,13 +524,30 @@ You can launch or start instances in a placement group (to achieve high throughp
 - Cloudwatch has- Dashboards, Alarms, Events and Logs
 
 ## Virtual Private Cloud And Other Services
-- You can specify only one subnet per AZ
-
+- VPC is virtual data center in cloud. VPC is a logically separated isolation within AWS
+- *You* define the network of your VPC including IPs, subnets, routing tables and network gateways. Route tables can control connections between different subnets within VPC
+- Leverage multiple levels of security using Security Groups and subnet NACLs
+> **You can specify only one subnet per AZ.** 1 subnet = 1 AZ
+- Soft limit on number of VPCs in a region is 5. This limit can be extended by writing to AWS
+- Smallest subnet size in AWS can be 16 IPs (::::/28)
+- Can create a Hardware VPN connection between your data center and VPC
+- Use [http://cidr.xyz/](http://cidr.xyz/) for calculating CIDR or IP address range withing a subnet
+- A VPC can have only one Internet Gateway which is highly available
+- **Default VPC:**
+  - Every region has one default VPC provisioned and managed by AWS
+  - All subnets in Default VPC have a route to the internet
+  - Each EC2 instance will have both private and public IP addresses
+- **VPC Peering:**
+  - Allows you to connect one VPC to another VPC via direct network route using private IP addresses
+  - Peer VPCs can be in different AWS accounts
+  - Does not have transitive peering (`VPC A <--> VPC B and VPC B <--> VPC C` does NOT mean `VPC A <--> VPC C `)
+  
 ### Security Groups (SG)
   - Only `ALLOW` rules can be specified using SGs. There are no `DENY` rules.
   - All inbound traffic is blocked by default
   - All outbound traffic is allowed by default
-  - Security groups are stateful. That is, if you create inbound rule to allow traffic in, that traffic is automatically allowed to go back out
+  - Security groups are **stateful**. That is, if you create inbound rule to allow traffic in, that traffic is automatically allowed to go back out
+  - **NACLs** are **stateless**
   - Can't use SG to block specific IPs. Use Network Access Control Lists for this purpose
 
 ## Route 53
@@ -602,6 +619,7 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Developed and supported by the MariaDB open source community
  - RDS never gives a public IPv4 address to a DB instance. It always provides a DNS endpoint
  - [RDS Limits](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
+ 
 #### RDS Automated Backups  
   - Automated backups are enabled by default and are stored in S3. The size of S3 storage will be same as the size of the RDS instance
   - Backups are taken in a pre-defined window. Storage IO may be suspended during backups and will result in latency
