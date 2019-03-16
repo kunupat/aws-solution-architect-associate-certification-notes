@@ -674,15 +674,15 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Backups will be charged
     - Data transfer within VPC will be charged
    - Security:
-    - Encrypted with SSL in transit
-    - Encrypted at rest by AES-256
-    - Automatically managed encryption keys by RedShift
-    - Can also use your own managed keys
-      - Hardware Security Module (HSM)
-      - AWS KMS
-   - Avilability:
-    - Not Multi-AZ. Available only in one AZ
-    - Can restore snapshots in new AZs, if required
+      - Encrypted with SSL in transit
+      - Encrypted at rest by AES-256
+      - Automatically managed encryption keys by RedShift
+      - Can also use your own managed keys
+        - Hardware Security Module (HSM)
+        - AWS KMS
+      - Avilability:
+        - Not Multi-AZ. Available only in one AZ
+        - Can restore snapshots in new AZs, if required
     
 ### ElastiCache- 
   - Web service for deploy, operate and scale in-memory cache in AWS
