@@ -529,7 +529,7 @@ You can launch or start instances in a placement group (to achieve high throughp
 - Leverage multiple levels of security using Security Groups and subnet NACLs
 > **You can specify only one subnet per AZ.** 1 subnet = 1 AZ
 - Soft limit on number of VPCs in a region is 5. This limit can be extended by writing to AWS
-- Smallest subnet size in AWS can be 16 IPs (::::/28)
+- Smallest subnet size in AWS can be 16 IPs `(::::/28)`
 - Can create a Hardware VPN connection between your data center and VPC
 - Use [http://cidr.xyz/](http://cidr.xyz/) for calculating CIDR or IP address range withing a subnet
 - A VPC can have only one Internet Gateway which is highly available
@@ -541,7 +541,17 @@ You can launch or start instances in a placement group (to achieve high throughp
   - Allows you to connect one VPC to another VPC via direct network route using private IP addresses
   - Peer VPCs can be in different AWS accounts
   - Does not have transitive peering (`VPC A <--> VPC B and VPC B <--> VPC C` does NOT mean `VPC A <--> VPC C `)
-  
+- VPC Tenancy:
+  - Default
+  - Dedicated
+- First four and the last IP of the CIDR range of AWS subnet are [reserved by AWS](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html). You can't assign these 5 addresses. These are servered for:
+  - First IP Address: Network address
+  - Second IP Address: VPC Router
+  - Third IP Address: For DNS server related
+  - Fourth IP Address: For future use
+  - Last IP Address: Network broadcast address. As AWS does not support network broadcast in VPC, this address is reserved
+- When a new Subnet is created in VPC, it will associated with Main(Default) Route Table by default. This may be risky if Main Route Table has a route to the internet, which means that every new subnet associated with the Main Route table by default will also have this internet route. Create a new Route Table instead and associate the new subnet to it.
+
 ### Security Groups (SG)
   - Only `ALLOW` rules can be specified using SGs. There are no `DENY` rules.
   - All inbound traffic is blocked by default
