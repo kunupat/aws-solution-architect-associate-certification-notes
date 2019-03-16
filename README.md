@@ -582,11 +582,15 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Amazon Aurora is a MySQL- and PostgreSQL-compatible enterprise-class database, starting at <$1/day.
     - Up to 5 times the throughput of MySQL and 3 times the throughput of PostgreSQL
     - Up to 64TiB of auto-scaling SSD storage
-    - Starts with 10GB and scales in 10GB increments
+    - Starts with 10GB and scales in 10GB increments Up to 64TiB
     - Compute resources can scale up to 32 vCPUs and 244GB memory
     - 6-way replication across three Availability Zones
-    - Up to 15 Read Replicas with sub-10ms replica lag
-    - Automatic monitoring and failover in less than 30 seconds
+    - Automatic monitoring and failover in less than 30 seconds (self-healing)
+    - 2 types of replicas:
+      - Up to 15 Aurora Read Replicas with sub-10ms replica lag
+      - Up to 5 MySQL Read Replicas
+      - Automatic failover to Aurora Read Replica and not to MySQL Replica
+    - Not covered in Free-tier
     
   - **MariaDB**
     - MySQL-compatible community edition
