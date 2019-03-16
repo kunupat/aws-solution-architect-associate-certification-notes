@@ -560,6 +560,35 @@ You can launch or start instances in a placement group (to achieve high throughp
   - **NACLs** are **stateless**
   - Can't use SG to block specific IPs. Use Network Access Control Lists for this purpose
 
+### Network Access Control Lists (NACLs)
+  - A VPC comes with a default NACL which allows all inbound and outbound traffic. You can create custom NACLs
+  - When a new private(custom) NACL is created, both inbound and outbound rules will be `DENY`
+  - One Subnet can only be associated with one NACL. However, a NACL can be associated with multiple subnets
+  - If a subnet is not associated with a custom NACL, it will be automatically associated with default NACL
+  - The routes are evaluated in numerical **Rule Numbers** order
+  - NACL gets precendance over SG. If NACL rules DENYS traffic and SG ALLOWS it for the same CIDR and Ports, NACL rules be taken into consideration while evaluating open routes
+  
+  
+### Network Access Translation (NAT)
+- Used to open a route to the internet for the instance which is in a private subnet so that it can get OS patches, download apps, etc.
+- NATing can be done using- NAT Gateways OR ~~NAT instances(will be depricated soon)~~
+- **Using NAT instances:**
+  - EC2 AMI for NAT instance is available
+  - Need to disable source/destination checks for the EC2 instance designated as NAT instance.
+  - Update the Route Table to open route to the internet from the NAT instance. Also, there must be a route out from private subnet to NAT instance.
+  - NAT instance itself should be created in a public subnet
+  - NAT instances can become bottlenecks depending on type of EC2 instance used. They may not be high-available and redundant if you have desined them in such a way
+  
+ - **Using NAT Gateway:** 
+  - Simpliefies NATing by automating many configurations that otherwise would be required with NAT Instances. NAT Gateways are mananged by AWS.
+  - NAT Gateway works on IPv4. Egress-Only Internet Gatways work on IPv6
+  - NAT Gateway itself should be created in a public subnet
+  - NAT Gateway needs Elastic IP address
+  - NAT Gateway should also be associated with a internet route using the Route Table.
+  - NAT Gateways are Highly available. NAT gateways in each Availability Zone are implemented with redundancy
+  > Create a NAT gateway in each Availability Zone to ensure zone-independent architecture.
+  - Refer to comparison between NAT Gateways and NAT instances [here](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-comparison.html)
+  
 ## Route 53
 - Domain Name Service (DNS) by AWS
 - Provides DNS Types: A Records, CNAME records(Canonical Name), Alias Records
