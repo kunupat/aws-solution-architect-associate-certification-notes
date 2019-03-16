@@ -557,17 +557,17 @@ You can launch or start instances in a placement group (to achieve high throughp
   - All inbound traffic is blocked by default
   - All outbound traffic is allowed by default
   - Security groups are **stateful**. That is, if you create inbound rule to allow traffic in, that traffic is automatically allowed to go back out
-  - **NACLs** are **stateless**
   - Can't use SG to block specific IPs. Use Network Access Control Lists for this purpose
 
 ### Network Access Control Lists (NACLs)
-  - A VPC comes with a default NACL which allows all inbound and outbound traffic. You can create custom NACLs
+  - A VPC comes with a default NACL which `ALLOWs` all inbound and outbound traffic. You can create custom NACLs
   - When a new private(custom) NACL is created, both inbound and outbound rules will be `DENY`
   - One Subnet can only be associated with one NACL. However, a NACL can be associated with multiple subnets
   - If a subnet is not associated with a custom NACL, it will be automatically associated with default NACL
-  - The routes are evaluated in numerical **Rule Numbers** order
+  - The routes are evaluated in numerical **Rule Numbers** order starting with the smallest numbered rule
   - NACL gets precendance over SG. If NACL rules DENYS traffic and SG ALLOWS it for the same CIDR and Ports, NACL rules be taken into consideration while evaluating open routes
-  
+  - NACLs can span accross multiple AZs, however subnets cannot
+  - **NACLs** are **stateless**
   
 ### Network Access Translation (NAT)
 - Used to open a route to the internet for the instance which is in a private subnet so that it can get OS patches, download apps, etc.
@@ -578,7 +578,7 @@ You can launch or start instances in a placement group (to achieve high throughp
   - Update the Route Table to open route to the internet from the NAT instance. Also, there must be a route out from private subnet to NAT instance.
   - NAT instance itself should be created in a public subnet
   - NAT instances can become bottlenecks depending on type of EC2 instance used. They may not be high-available and redundant if you have desined them in such a way
-  
+
  - **Using NAT Gateway:** 
   - Simpliefies NATing by automating many configurations that otherwise would be required with NAT Instances. NAT Gateways are mananged by AWS.
   - NAT Gateway works on IPv4. Egress-Only Internet Gatways work on IPv6
@@ -588,7 +588,16 @@ You can launch or start instances in a placement group (to achieve high throughp
   - NAT Gateways are Highly available. NAT gateways in each Availability Zone are implemented with redundancy
   > Create a NAT gateway in each Availability Zone to ensure zone-independent architecture.
   - Refer to comparison between NAT Gateways and NAT instances [here](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-comparison.html)
-  
+
+### VPC Endpoints   
+- A VPC endpoint enables you to privately connect your VPC to supported AWS services (like S3) and VPC endpoint services powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection
+- Two Types:
+  - Instance Endpoint: Is an Elastic Network Interface(ENI) that serves as **Entry Point** for traffic destined to the service
+  - Gateway Endpoint: serves as a **target** for a route in your route table for traffic destined for the service
+    - This is highly available
+
+> Refer [this link to see how to connect public ELB to EC2 instances in private Subnet] (https://aws.amazon.com/premiumsupport/knowledge-center/public-load-balancer-private-ec2/)
+    
 ## Route 53
 - Domain Name Service (DNS) by AWS
 - Provides DNS Types: A Records, CNAME records(Canonical Name), Alias Records
