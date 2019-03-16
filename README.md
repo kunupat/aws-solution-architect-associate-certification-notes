@@ -601,12 +601,13 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Supports global transaction ID (GTID) and thread pooling
     - Developed and supported by the MariaDB open source community
  - RDS never gives a public IPv4 address to a DB instance. It always provides a DNS endpoint
-
+ - [RDS Limits](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
 #### RDS Automated Backups  
   - Automated backups are enabled by default and are stored in S3. The size of S3 storage will be same as the size of the RDS instance
   - Backups are taken in a pre-defined window. Storage IO may be suspended during backups and will result in latency
   - Automated Backups will be deleted after deleting original RDS instance
   - backup retention period can be 35 days at the max
+  
 #### RDS Snapshots
   - Snapshots are user intiaited
   - Snapshots will not be deleted even after deleting original RDS instance
@@ -621,7 +622,7 @@ You can launch or start instances in a placement group (to achieve high throughp
   - Existing RDS instance cannot be encrypted. To encrypt existing RDS instance, take a snapshot of it, make a copy of the snapshot and encrypt the copy
 
 #### Multi-AZ Deployment
-  - Used for Disater Recovery (DR)
+  - Used for Disater Recovery (DR) only. NOT as Read Replicas.
   - AWS automatically reoplicates RDS instance into another AZ. Supports automatic failover to stanby replica
   - Available for all RDS engines. Aurora DB is multi-AZ by default
   - It is synchronous
