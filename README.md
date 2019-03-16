@@ -582,6 +582,8 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Amazon Aurora is a MySQL- and PostgreSQL-compatible enterprise-class database, starting at <$1/day.
     - Up to 5 times the throughput of MySQL and 3 times the throughput of PostgreSQL
     - Up to 64TiB of auto-scaling SSD storage
+    - Starts with 10GB and scales in 10GB increments
+    - Compute resources can scale up to 32 vCPUs and 244GB memory
     - 6-way replication across three Availability Zones
     - Up to 15 Read Replicas with sub-10ms replica lag
     - Automatic monitoring and failover in less than 30 seconds
@@ -595,7 +597,6 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Supports global transaction ID (GTID) and thread pooling
     - Developed and supported by the MariaDB open source community
  - RDS never gives a public IPv4 address to a DB instance. It always provides a DNS endpoint
-
 
 #### RDS Automated Backups  
   - Automated backups are enabled by default and are stored in S3. The size of S3 storage will be same as the size of the RDS instance
@@ -637,7 +638,9 @@ You can launch or start instances in a placement group (to achieve high throughp
   - Fully-managed, no-SQL DB with consistent, single-digit latency at any scale
   - Supports both key-value and document data models
   - Always stored on SSDs
-  - Consistency Models:
+  - Cheap reads, expensive writes
+  - Read and Write Capacity Units can be changed dynamically without needing to have downtime
+  - **Consistency Models:**
     - Eventual Consistent Reads (Default)
     - Strongly Consistent Reads
   - Spread accross 3 geographically separate regions to achieve redudancy
@@ -648,11 +651,43 @@ You can launch or start instances in a placement group (to achieve high throughp
         - Read Throughput $0.0065/hour for every 50 units
       - Storage Costs:
         - $0.25/GB/Month
+        
 ### Redshift- Data Warehousing- OLAP (OnLine Analytical Processing)
-
-### ElastiCache- In-memory Caching. Cahching Engines supported by AWS:
-  - **Redis**
-  - **Memcached**
+  - Fully-managed, Petabyte-scale Data Warehouse service
+  - Columnar Data Storage-
+    - Sequential data storage in columns instead of rows
+    - Best suited for faster query processing for OLAP
+    - Advanced Data Compression
+    - Massive Parallel Processing (MPP)- By automatically distributing data and query processing across nodes
+  - Nodes:
+    - Single Node- 160Gb
+    - Multi Node:
+      - Leader Node: Manages connections and recieves queries
+      - Compute Node: Stores data and perform queries and computations. Upto 128 Compute Nodes
+  - Pricing:
+    - Based on Compute Node Hours
+    - No charges for Leader Node. Only Compute Nodes will be charged
+    - Backups will be charged
+    - Data transfer within VPC will be charged
+   - Security:
+    - Encrypted with SSL in transit
+    - Encrypted at rest by AES-256
+    - Automatically managed encryption keys by RedShift
+    - Can also use your own managed keys
+      - Hardware Security Module (HSM)
+      - AWS KMS
+   - Avilability:
+    - Not Multi-AZ. Available only in one AZ
+    - Can restore snapshots in new AZs, if required
+    
+### ElastiCache- 
+  - Web service for deploy, operate and scale in-memory cache in AWS
+  - In-memory Caching. Cahching Engines supported by AWS:
+    - **Redis:**
+      - Supports multi-AZ deployment for redundancy and Master-Slave replication
+    - **Memcached**
+      - Does not support multi-AZ redundancy
+  - Good choice for less frequently changed data and read-heavy transactions
   
 ## Simple Queue Service
 
