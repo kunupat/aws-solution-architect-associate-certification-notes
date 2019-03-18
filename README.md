@@ -531,7 +531,7 @@ You can launch or start instances in a placement group (to achieve high throughp
 - Soft limit on number of VPCs in a region is 5. This limit can be extended by writing to AWS
 - Smallest subnet size in AWS can be 16 IPs `(::::/28)`
 - Can create a Hardware VPN connection between your data center and VPC
-- Use [http://cidr.xyz/](http://cidr.xyz/) for calculating CIDR or IP address range withing a subnet
+- Use [http://cidr.xyz/](http://cidr.xyz/) for calculating CIDR or IP address range within a subnet
 - A VPC can have only one Internet Gateway which is highly available
 - **Default VPC:**
   - Every region has one default VPC provisioned and managed by AWS
@@ -761,9 +761,39 @@ You can launch or start instances in a placement group (to achieve high throughp
   - Good choice for less frequently changed data and read-heavy transactions
   
 ## Simple Queue Service
-
+- SQS was the first AWS service that was made available to the public
+- A distributed web service that gives you access to a message queue
+- Pull-based and NOT Push-based
+- Messages can be kept in queue from **1 minute to 14 days**
+- Default retention period is of **4 days**
+- A SQS message can be of upto 256 KBytes of **text**
+- Gaurantees that message is processed at least once
+- **SQS Visibility Timeout:**
+  - The timeout before a message remaing invisible before getting visible again. Message will get invisible when it is picked up by a consumer for processing. If the conusomer processes the message wihin the visibility timeout, the message will be deleted from the queue. If consumer takes more time to process an delete the message, the message will become visible again so that next processor can process it. This can result in message getting delivered twice.
+  - Default Visibility Timeout is 30 seconds and can be increased to 12 hours max
+- **SQS Long Polling:** 
+  - Long polling does not return a response until a message arriaves in the queue or the long poll times out
+  - Cost savings compared to multiple short-pollings
+- **Two Types of SQS Queues:**
+  - Standard Queues (default):
+    - Lets you have nearly-unlimited number of transactions/second
+    - Ensures that message is delivered at least once
+    - Proivdes best-effort ordering of messages (that is, more than one copy of a message can get delivered out of order ocassionally)
+  - FIFO Queues:
+    - Strictly preserves the order in which messages are recieved, processed and delivered
+    - Each message will be delivered only once and will remain in the MQ until consumer processes and deletes the message
+    - Limited to 300 transactions per second (TPS)
+    - Supports message groups
+  
 ## Simple Workflow Service
-
+  - Amazon's SWF makes it easy to coordinate work accross distributed application components
+  - **SWF Components:**
+    - **SWF Workers:** Programs that interact with AWS to `Get Tasks --> Process Tasks --> Return Results`
+    - **SWF Decider:** Program that controls the coordination of tasks. That is, ordering, councurrency and scheduling as per app logic
+    - **SWF Domains:** 
+      - Scope(container) for workflow, activity types, executions and task lists from other SWF domains within same AWS account
+      - Domain can registered using AWS Management Console or by using `RegisterDomain` action in AWS SWF API using JSON format
+   
 ## Simple Notification Service
 
 ## Elastic Transcoder
