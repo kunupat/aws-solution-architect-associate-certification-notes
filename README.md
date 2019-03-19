@@ -786,19 +786,39 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Supports message groups
   
 ## Simple Workflow Service
-  - Amazon's SWF makes it easy to coordinate work accross distributed application components
-  - **SWF Components:**
-    - **SWF Workers:** Programs that interact with AWS to `Get Tasks --> Process Tasks --> Return Results`
-    - **SWF Decider:** Program that controls the coordination of tasks. That is, ordering, councurrency and scheduling as per app logic
-    - **SWF Domains:** 
-      - Scope(container) for workflow, activity types, executions and task lists from other SWF domains within same AWS account
-      - Domain can registered using AWS Management Console or by using `RegisterDomain` action in AWS SWF API using JSON format
+- Amazon's SWF makes it easy to coordinate work accross distributed application components
+- **SWF Components:**
+  - **SWF Workers:** Programs that interact with AWS to `Get Tasks --> Process Tasks --> Return Results`
+  - **SWF Decider:** Program that controls the coordination of tasks. That is, ordering, councurrency and scheduling as per app logic
+  - **SWF Domains:** 
+    - Scope(container) for workflow, activity types, executions and task lists from other SWF domains within same AWS account
+    - Domain can registered using AWS Management Console or by using `RegisterDomain` action in AWS SWF API using JSON format
    
 ## Simple Notification Service
-
+- SNS is a web service that makes it easy to setup, operate and send(push) messages from AWS cloud
+- Scalable(auto-scaling), flexible and cost-effective service to publish messages from apps and deliver them to subscribers/other apps
+- Supports Push Notifications, email, SMS, SQS queues, HTTP endpoint, Lambda Functions
+- Stores messages in multiple AZs for redudancy and ensure messages are not lost
+- Pay-as-you-go pricing model:
+  - $0.50/1 million SNS requests
+  - $0.06/100,100 notifications over HTTP
+  - $0.75/100 notifications overs SMS
+  - $2.00/100,000 notifications over email
+- **Components:**
+  - **Topics:** 
+    - Access point for allowing participants to dynamically subscribe for copies of same notification
+    - One topic can support multiple endpoint types listed above. SNS appropriately formats messages to send to different subscribers
+  - **Subscribers:**
+    - Email, HTTP Endpoints, Lambda Functions, SMS, etc. type of subscribers of the topic
+    
 ## Elastic Transcoder
+- Media Transcoder web service in AWS cloud
+- Convert media files from one format to another format
 
 ## API Gateway
+- Fully managed AWS service to publish, maintain, monitor and secure APIs
+- Supports API Caching to reduce latency of API. It's a TTL cache
+- 
 
 ## Kinesis
 
