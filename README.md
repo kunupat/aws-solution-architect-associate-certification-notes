@@ -763,11 +763,12 @@ You can launch or start instances in a placement group (to achieve high throughp
 ## Simple Queue Service
 - SQS was the first AWS service that was made available to the public
 - A distributed web service that gives you access to a message queue
-- Pull-based and NOT Push-based
+- **Pull-based** and NOT Push-based (SNS is push-based service)
 - Messages can be kept in queue from **1 minute to 14 days**
 - Default retention period is of **4 days**
 - A SQS message can be of upto 256 KBytes of **text**
 - Gaurantees that message is processed at least once
+- Offers message-oriented API
 - **SQS Visibility Timeout:**
   - The timeout before a message remaing invisible before getting visible again. Message will get invisible when it is picked up by a consumer for processing. If the conusomer processes the message wihin the visibility timeout, the message will be deleted from the queue. If consumer takes more time to process an delete the message, the message will become visible again so that next processor can process it. This can result in message getting delivered twice.
   - Default Visibility Timeout is 30 seconds and can be increased to 12 hours max
@@ -787,21 +788,28 @@ You can launch or start instances in a placement group (to achieve high throughp
   
 ## Simple Workflow Service
 - Amazon's SWF makes it easy to coordinate work accross distributed application components
+- Default rentention period is **14 days** and can be increased to up to **1 year** for workflow execution
+- Presents task-oriented API
 - **SWF Components:**
   - **SWF Workers:** Programs that interact with AWS to `Get Tasks --> Process Tasks --> Return Results`
   - **SWF Decider:** Program that controls the coordination of tasks. That is, ordering, councurrency and scheduling as per app logic
   - **SWF Domains:** 
     - Scope(container) for workflow, activity types, executions and task lists from other SWF domains within same AWS account
     - Domain can registered using AWS Management Console or by using `RegisterDomain` action in AWS SWF API using JSON format
-   
+- Ensures that task is assigned only once
+- **SWF Actors:**
+    - Workflow Starters
+    - Deciders
+    - Activity Workers
+
 ## Simple Notification Service
 - SNS is a web service that makes it easy to setup, operate and send(push) messages from AWS cloud
 - Scalable(auto-scaling), flexible and cost-effective service to publish messages from apps and deliver them to subscribers/other apps
-- Supports Push Notifications, email, SMS, SQS queues, HTTP endpoint, Lambda Functions
+- Supports Push Notifications, email, email JSON, SMS, SQS queues, HTTP/HTTPS endpoint, Lambda Functions
 - Stores messages in multiple AZs for redudancy and ensure messages are not lost
 - Pay-as-you-go pricing model:
   - $0.50/1 million SNS requests
-  - $0.06/100,100 notifications over HTTP
+  - $0.06/100,100 notifications over HTTP/HTTPS
   - $0.75/100 notifications overs SMS
   - $2.00/100,000 notifications over email
 - **Components:**
@@ -809,18 +817,36 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Access point for allowing participants to dynamically subscribe for copies of same notification
     - One topic can support multiple endpoint types listed above. SNS appropriately formats messages to send to different subscribers
   - **Subscribers:**
-    - Email, HTTP Endpoints, Lambda Functions, SMS, etc. type of subscribers of the topic
+    - Email, HTTP/HTTPS Endpoints, Lambda Functions, SMS, etc. type of subscribers of the topic
     
 ## Elastic Transcoder
 - Media Transcoder web service in AWS cloud
 - Convert media files from one format to another format
+- Pay based on number of minutes transcoded and the resolution at which it was trancoded
 
 ## API Gateway
 - Fully managed AWS service to publish, maintain, monitor and secure APIs
 - Supports API Caching to reduce latency of API. It's a TTL cache
-- 
+- Can throttle number of requests
+- Supports CORS (Cross-Origin Resource Sharing)
+  - `"Origin policy cannot be read at the remote resource"` Fix this error by enabling CORS on API Gateway
 
 ## Kinesis
+- AWS platform to send the streaming data to
+- **Types of Core Kinesis Services:**
+  - **Kinesis Streams:**
+    - Can have multiple Shards within a stream: 
+      - 5 transactions/second for read; up to maximum total data read rate of 2MB/second
+      - Up to 1000 records/second for writes; up to maximum total data write rate of 1MB/second(including partition keys)
+    - 24 Hours to 7 days retention of data
+    - Consumers of Kinesis Streams are EC2 instances
+  - **Kinesis Firehose:**
+    - No need to do manual configuration of shards. More automated than Kinesis Streams
+    - No automatic data retention
+    - Does not have Shards
+    - Automatic analytics using Lambda can be done
+  - **Kinesis Analytics:**
+    - Run SQL-type queries on data within Kinesis Streams or Kinesis Firehose for analytical purposes
 
 ## CloudFormation
 
@@ -831,11 +857,13 @@ You can launch or start instances in a placement group (to achieve high throughp
 ## Other Notes
 
 ### AWS services that are specific to a region
-The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region:
+- This list is not complete
+- The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region:
 1. Security Groups
 2. IAM Keys
 
 ### AWS services that are *NOT* specific to a region
+- This list is not complete
 1. IAM Roles
 2. [Amazon S3](#simple-storage-service)
 3. Lambda functions can do things globally (e.g. access S3 buckets globally)
