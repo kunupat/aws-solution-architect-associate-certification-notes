@@ -26,6 +26,7 @@ Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-
 * [CloudFormation](#cloudformation)
 * [Elastic Container Service(ECS)](#elastic-container-service)
 * [Elastic Beanstalk](#elastic-beanstalk)
+* [AWS Well Architected](#aws-well-architected)
 * [Other Notes](#other-notes)
 * [Exam structure in January 2019](#exam-structure-in-january-2019)
 
@@ -856,16 +857,59 @@ You can launch or start instances in a placement group (to achieve high throughp
 
 ## Elastic Beanstalk
 
+## AWS Well Architected
+- Set of questions to ask if your architecture meets the requirements of well architected framework
+- Five Pillars:
+1. Security Pillar
+  - Shared responsibilty model
+  - Definition: Security in four areas-
+    - Data Protection
+      - Classification of data
+      - Implementation of Least Privilge Access system
+      - Encryption of data at rest and in transit
+    - Privilege Management
+      - IAMs, MFA,
+      - ACLs
+      - Role based access controls
+      - Password management
+    - Infrastructure Protection
+      - At VPC level
+        - Private/public subnets, SGs, NACLs (n/w and host level protection)
+        - AWS service level protection
+        - OS level protection (anti-virus, etc.)
+    - Detective Controls
+      - Detect and identify security breach using Cloudtrail, CloudWatch, AWS Config, S3, Glacier, etc.
+2. Reliability Pillar
+  - Ability of the system to revover from infrastructure failuers, outages, disurptions as well as the ability to dynamically aquire computing resources to meet demands of load
+  - Definition:
+    - Foundation (IAM, VPC)
+      - AWS provides and manages most of the foundation (infra)
+      - AWS Service Limits help accidental creation/usage of foundation resources
+    - Change Management (CloudTrail)
+      - Ability to monitor and react to the changes in AWS environment
+      - Change control process and auditing
+    - Failure Management (CloudFormation)
+      - Architect systems assuming that failures will occur
+      - Test for failure in production
+3. Performance Efficiency Pillar
+  - Focuses on how to utilise computing resources efficiently to meet requirements and maintain the efficiency as and when demand changes and technology evolves
+   - Definition:
+    - 
+4. Cost Optimization Pillar
+5. Operational Excellence Pillar
+
+
 ## Other Notes
 
 ### AWS services that are specific to a region
-- This list is not complete
+- *This list is not complete*
 - The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region:
 1. Security Groups
 2. IAM Keys
+3. CloudTrail
 
 ### AWS services that are *NOT* specific to a region
-- This list is not complete
+- *This list is not complete*
 1. IAM Roles
 2. [Amazon S3](#simple-storage-service)
 3. Lambda functions can do things globally (e.g. access S3 buckets globally)
