@@ -27,6 +27,7 @@ Refer my [GitHub Pages site](https://kunupat.github.io/2019/01/16/AWS-Solutions-
 * [Elastic Container Service(ECS)](#elastic-container-service)
 * [Elastic Beanstalk](#elastic-beanstalk)
 * [AWS Well Architected](#aws-well-architected)
+* [AWS Organizations](#aws-organizations)
 * [Other Notes](#other-notes)
 * [Exam structure in January 2019](#exam-structure-in-january-2019)
 
@@ -438,7 +439,7 @@ It can be either AES-256 or AWS-KMS or None. Any new object will be encrypted wi
 - Get Instance Meta-data: CURL URL: `http://169.254.169.254/latest/meta-data/`
 - Get Instance User Data: CURL URL: `http://169.254.169.254/latest/user-data/`
 
-- **EC2 Placement Groups:**
+### EC2 Placement Groups
 You can launch or start instances in a placement group (to achieve high throughput and low latency), which determines how instances are placed on underlying hardware. When you create a placement group, you specify one of the following strategies for the group:
   - **Cluster** – clusters instances into a low-latency group in a single Availability Zone
   - **Partition** – spreads instances across logical partitions, ensuring that instances in one partition do not share underlying hardware with instances in other partitions
@@ -455,7 +456,9 @@ You can launch or start instances in a placement group (to achieve high throughp
 
 ## Elastic Block Storage
 - Think of Elastic Block Storage (EBS) as a virtual disk in AWS cloud. EBS is attached to an EC2 instance.
-- EBS Volume Types:
+- EBS volumes are persistent and can be detached and reattached to other EC2 instances
+- EBS volumes can be stopped without loosing data
+- **EBS Volume Types:**
   - General Purpose SSD(GP2)
     - Up to 10000 IOPs
   - Provisioned IOPS SSD(IO1)
@@ -598,7 +601,13 @@ You can launch or start instances in a placement group (to achieve high throughp
     - This is highly available
 
 > Refer [this link to see how to connect public ELB to EC2 instances in private Subnet] (https://aws.amazon.com/premiumsupport/knowledge-center/public-load-balancer-private-ec2/)
-    
+
+### VPC Peering
+- A connection between two VPCs using their private IPs
+- EC2 instances of one VPC can communicate with EC2 in other VPCs in **other accounts in same region**
+- CIDR ranges of two peering VPCs should **not** overlap with each other
+- Transitive Peering is **not** supported
+
 ## Route 53
 - Domain Name Service (DNS) by AWS
 - Provides DNS Types: A Records, CNAME records(Canonical Name), Alias Records
@@ -822,7 +831,7 @@ You can launch or start instances in a placement group (to achieve high throughp
     
 ## Elastic Transcoder
 - Media Transcoder web service in AWS cloud
-- Convert media files from one format to another format
+- Convert media files from one format to another format (specific to target device)
 - Pay based on number of minutes transcoded and the resolution at which it was trancoded
 
 ## API Gateway
@@ -833,7 +842,7 @@ You can launch or start instances in a placement group (to achieve high throughp
   - `"Origin policy cannot be read at the remote resource"` Fix this error by enabling CORS on API Gateway
 
 ## Kinesis
-- AWS platform to send the streaming data to
+- AWS platform to send the streaming data(Social Media, Big Data, IoT, etc.) to
 - **Types of Core Kinesis Services:**
   - **Kinesis Streams:**
     - Can have multiple Shards within a stream: 
@@ -912,8 +921,28 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Operation
     - Response
     
-## Other Notes
+## AWS Organizations
+- Benefits of using AWS Organizations:
+  - Centrally manage AWS account policies
+  - Centrally manage access to AWS services (using Service Control Policies- SCPs)
+  - Automate AWS account creation and management
+  - Consolidate Billing across multiple AWS accounts
+- Consolidated Billing (Paying Account) Account (Root)
+- Operational Units (OUs) AWS accounts are linked to root account. Maximum 20 accounts can be linked to Root Account
+- Apply policies to OUs and AWS Accounts under OUs
+- Consolidate Billing Benefits:
+  - One Bill Per AWS Account
+  - Easy to track changes and allocated costs
+  - Volume Pricing Discounts (saves money)
 
+## Other Notes
+- For processing large amount of data in AWS (running analytics, for example) use-
+  - RedShift: For Business Intelligence (analytics)
+  - Map Reduce: For Big Data Processing
+  - Get the data in using AWS Kinesis
+- OpsWorks:
+  - *Chef* based infra-provisioning/orchestration service provided by AWS
+  
 ### AWS services that are specific to a region
 - *This list is not complete*
 - The below AWS services are specific to a AWS region. E.g. If you plan to launch AWS EC2 instances in multiple regions, you'll need to create a security group in each region:
