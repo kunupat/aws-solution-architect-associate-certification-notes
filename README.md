@@ -893,7 +893,7 @@ You can launch or start instances in a placement group (to achieve high throughp
       - Test for failure in production
 3. **Performance Efficiency Pillar**
   - Focuses on how to utilise computing resources efficiently to meet requirements and maintain the efficiency as and when demand changes and technology evolves
-   - Definition: Consists of 4 areas:
+  - Definition: Consists of 4 areas:
     - Compute (Autoscaling)
     - Storage (EBS, S3, Glacier)
     - Database (RDS, DynamoDB, Redshift)
