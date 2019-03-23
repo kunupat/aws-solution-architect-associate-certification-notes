@@ -608,6 +608,32 @@ You can launch or start instances in a placement group (to achieve high throughp
 - CIDR ranges of two peering VPCs should **not** overlap with each other
 - Transitive Peering is **not** supported
 
+### AWS Direct Connect
+- Dedicated n/w connection between your premises to AWS
+- Direct connection between Direct AWS Connect Facility and AWS DC
+
+### Security Token Service (STS)
+- Grants users limited or temporary access to AWS services
+- Users can come from three sources:
+  - Federation (e.g. Active Directory - Identity Store)
+    - SAML based; User are not required to be in AWS IAM; Uses SSO
+  - Federation with Mobile Apps
+    - Facebook/Google/Amazon or other OpenID providers (Identity Stores)
+  - Cross Account Access
+    - AWS cross account access
+  - Components Involved:
+    - Your app/service to which user has to login
+    - Identity Broker Service (captures user's credentials)
+    - LDAP Directory of Enterprise (validates user's credentials)
+    - AWS STS (returns 4 values to Identity Broker)
+    - AWS service (to which your app requested access to, checks IAM for allowing acceess or deny it)
+    - AWS IAM (allows/denies access request)
+  - STS returns 4 values to Identity Broker:
+    - Access Key
+    - Secrete Access Key
+    - Temporary Access Token
+    - Duration (1-36 hours)
+    
 ## Route 53
 - Domain Name Service (DNS) by AWS
 - Provides DNS Types: A Records, CNAME records(Canonical Name), Alias Records
@@ -859,10 +885,25 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Run SQL-type queries on data within Kinesis Streams or Kinesis Firehose for analytical purposes
 
 ## CloudFormation
-
+- AWS infra-provisioner using human-readable (JSON) format and drag-and-drop GUI
 
 ## Elastic Container Service
-
+- ECS is a AWS service to run, stop and manage Docker containers on a cluser of EC2 instances
+- Components of ECS: 
+  - Task Definition: 
+      - JSON format files to describe one or more containers that form your application
+      - Contains defintions about which Docker images to use, CPU and Memory requirements, whether containers are linked, n/w mode, env. parameters, IAM roles, etc
+  - ECS Clusters: Logical grouping of container instances
+  - ECS Scheduling can be done using either:
+    - Service Scheduler
+    - Custom Scheduler
+  - ECS Container Agent: Used to connect EC2 instances to ECS cluster (Linux only)
+    - Pre-installed on special ECS AMIs
+    - Will not work with Windows containers
+  - ECS Security: Using IAM roles
+    - Security Groups operate at the instance level and not at the task/container level
+  - ECS Limits
+- ECR is AWS's container registry controlled with IAM access control
 
 ## Elastic Beanstalk
 
@@ -949,6 +990,7 @@ You can launch or start instances in a placement group (to achieve high throughp
 1. Security Groups
 2. IAM Keys
 3. CloudTrail
+4. ECS
 
 ### AWS services that are *NOT* specific to a region
 - *This list is not complete*
