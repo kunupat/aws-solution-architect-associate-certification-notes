@@ -860,7 +860,7 @@ You can launch or start instances in a placement group (to achieve high throughp
 ## AWS Well Architected
 - Set of questions to ask if your architecture meets the requirements of well architected framework
 - Five Pillars:
-1. Security Pillar
+1. **Security Pillar**
   - Shared responsibilty model
   - Definition: Security in four areas-
     - Data Protection
@@ -879,7 +879,7 @@ You can launch or start instances in a placement group (to achieve high throughp
         - OS level protection (anti-virus, etc.)
     - Detective Controls
       - Detect and identify security breach using Cloudtrail, CloudWatch, AWS Config, S3, Glacier, etc.
-2. Reliability Pillar
+2. **Reliability Pillar**
   - Ability of the system to revover from infrastructure failuers, outages, disurptions as well as the ability to dynamically aquire computing resources to meet demands of load
   - Definition:
     - Foundation (IAM, VPC)
@@ -891,14 +891,27 @@ You can launch or start instances in a placement group (to achieve high throughp
     - Failure Management (CloudFormation)
       - Architect systems assuming that failures will occur
       - Test for failure in production
-3. Performance Efficiency Pillar
+3. **Performance Efficiency Pillar**
   - Focuses on how to utilise computing resources efficiently to meet requirements and maintain the efficiency as and when demand changes and technology evolves
-   - Definition:
-    - 
-4. Cost Optimization Pillar
-5. Operational Excellence Pillar
-
-
+   - Definition: Consists of 4 areas:
+    - Compute (Autoscaling)
+    - Storage (EBS, S3, Glacier)
+    - Database (RDS, DynamoDB, Redshift)
+    - Space-time trade-off (CloudFront, ElastiCache, Direct Connect, RDS Read Replicas, etc.) 
+4. **Cost Optimization Pillar**
+  - Reduce your costs to a minimum while still achieving your business objectives
+  - Definition:
+    - Matched supply and demand (Autoscaling)
+    - Cost-effective resources (EC2- Reserved Instances, AWS Trusted Advisor)
+    - Expenditure awareness (CloudWatch Alarms, SNS)
+    - Optimizing over time (AWS Blog, AWS Trusted Advisor)
+5. **Operational Excellence Pillar**
+  - Operational practices and procedures to manage production workloads. How planned changes are executed and how to respond to unexpected operational events
+  - Definition: Three areas:
+    - Preparation
+    - Operation
+    - Response
+    
 ## Other Notes
 
 ### AWS services that are specific to a region
